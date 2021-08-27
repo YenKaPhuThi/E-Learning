@@ -1,0 +1,109 @@
+.header {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+}
+
+.navbar .logo img {
+  height: 2.8rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+
+  padding: 0.4rem;
+
+  height: 5.6rem;
+}
+
+.navbar .link,
+.navbar button {
+  margin: 0 1.2rem;
+}
+
+.navbar .logo {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar .btn-outline {
+  border: 0.1rem solid #1c1d1f;
+
+  padding: 1.2rem;
+}
+
+.navbar .btn-outline:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.navbar .btn-dark {
+  color: #fff;
+  background-color: #000;
+
+  padding: 1.2rem;
+}
+
+.navbar .link:hover {
+  color: #5624d0;
+}
+
+.navbar .navbar-list {
+  display: none;
+}
+
+.navbar .input-group {
+  background-color: #f7f9fa;
+  border-radius: 5rem;
+  border: 1px solid #1c1d1f;
+
+  height: 4.8rem;
+}
+
+.navbar .input-group .form-control {
+  font-size: 1.4rem;
+  line-height: 2rem;
+
+  background-color: transparent;
+
+  margin: 0 1.6rem 0 0;
+
+  width: 100%;
+}
+
+.navbar .input-group .form-control:focus {
+  outline: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar {
+    padding: 2.4rem 1.2rem;
+
+    height: 7.2rem;
+  }
+
+  .navbar .logo {
+    flex: none;
+
+    margin: 0 1.2rem 0;
+  }
+
+  .navbar .logo img {
+    height: 3.4rem;
+  }
+
+  .navbar .visible-xs {
+    display: none;
+  }
+
+  .navbar .navbar-list {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+  }
+
+  .navbar .link {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}

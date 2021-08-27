@@ -1,0 +1,11 @@
+.feature-topic a {
+    color: #5624d0;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-top: 2.4rem;
+}
+
+.feature-topic p {
+    color: #6a6f73;
+    margin-top: .8rem !important;
+}
