@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../../layout/Header";
-import Banner from "../../components/Banner";
-
+import Header from "./../../Components/Header";
+import Banner from "./../../Components/Banner";
 
 export default function Home() {
   return (
