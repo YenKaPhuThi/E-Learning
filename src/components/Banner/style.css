@@ -1,40 +1,14 @@
-.banner .text-nevada {
+.text-nevada {
   color: #6a6f73;
 }
 
-.banner .title {
-  font-size: 3.2rem;
-  line-height: 4rem;
-}
-
-.banner .btn-outline {
-  display: block;
-
-  text-align: left;
-
-  border: 0.1rem solid #1c1d1f;
-
-  padding: 1.2rem;
-
-  width: 100%;
-
-  position: relative;
-}
-
-.banner .btn-outline .fas {
-  position: absolute;
-
-  top: 50%;
-  right: 1.2rem;
-
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.title {
+  font-size: 2rem;
+  line-height: 2.5rem;
 }
 
 .banner .banner-image {
-  height: 20rem;
+  height: 12.5rem;
 }
 
 .banner .banner-image img {
@@ -44,43 +18,24 @@
   height: 100%;
 }
 
-.banner .banner-content {
-  background: #fff;
-
-  padding: 2.4rem;
-}
-
 @media only screen and (min-width: 768px) {
-  .banner {
-    position: relative;
+  .title {
+    font-size: 2.5rem;
+    line-height: 3.2rem;
   }
 
-  .banner .title {
-    font-size: 4rem;
-    line-height: 5rem;
-  }
-
-  .banner .desc {
-    font-size: 1.9rem;
-    line-height: 2.6rem;
-  }
-
-  .banner .banner-image {
-    height: 40rem;
-  }
-
-  .banner .banner-content {
-    box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
-
-    width: 44rem;
-
+  .md-absolute-x-center {
     position: absolute;
     top: 50%;
-    left: 4.8rem;
+    left: 3rem;
 
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+  }
+
+  .banner .banner-image {
+    height: 25rem;
   }
 }
