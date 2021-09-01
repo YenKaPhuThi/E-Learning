@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import cls from "classnames";
+import { useSelector } from "react-redux";
+
+// Styles
 import "./style.css";
 
 export default function Header() {
   const [showNavbar, setShowNavbar] = useState(false);
+
+  const courseCategories = useSelector((state) => {
+    return state.course.courseCategories;
+  });
 
   const handleShowNavbar = () => {
     setShowNavbar(true);
@@ -11,6 +17,19 @@ export default function Header() {
 
   const handleCloseNavbar = () => {
     setShowNavbar(false);
+  };
+
+  const renderCourseCategories = () => {
+    return courseCategories.map((item, index) => {
+      return (
+        <li key={index}>
+          <a className="flex items-center justify-between px-4 py-2" href="#">
+            {item.tenDanhMuc}
+            <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
+          </a>
+        </li>
+      );
+    });
   };
 
   return (
@@ -84,7 +103,10 @@ export default function Header() {
           >
             Sign up
           </a>
-          <a href="#" className="p-3 border border-black font-bold text-sm hover-bg-gray">
+          <a
+            href="#"
+            className="p-3 border border-black font-bold text-sm hover-bg-gray"
+          >
             <i className="fas fa-globe-asia"></i>
           </a>
         </div>
@@ -124,98 +146,7 @@ export default function Header() {
             <h5 className="font-bold text-gray text-sm px-4 pt-4">
               Most popular
             </h5>
-            <ul>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Web Development
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Mobile Development
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Game Development
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Entrepreneurship
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Business Analytics & Intelligence
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Digital Marketing
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Graphic Design & Illustration
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  IT Certifications
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  Personal Transformation
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="flex items-center justify-between px-4 py-2"
-                  href="#"
-                >
-                  All categories
-                  <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
-                </a>
-              </li>
-            </ul>
+            <ul>{renderCourseCategories()}</ul>
           </div>
         </div>
       </nav>
