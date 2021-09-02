@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-
 import React from "react";
 import "./style.css";
 export default function FeatureByCategory() {
   return (
     <div
-      className=" min-h-screen:60vh  bg-gray-100 max-w-full py-8 feature-topic xl:pl-24"
+      className=" bg-gray-100 max-w-full py-8 feature-topic xl:pl-24"
       style={{ backGroundColor: "#f7f9fa" }}
     >
       <div className="p-6 bg-coolGray-100 text-coolGray-800 container  ">
@@ -15,44 +14,44 @@ export default function FeatureByCategory() {
             <h2 className="text-2xl font-bold">Development</h2>
             <div className="flex flex-col  text-sm text-coolGray-600">
               <a href="#">Python</a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Web Developement </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Machine Learning </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
             </div>
           </div>
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold">Bussiness </h2>
             <div className="flex flex-col text-sm text-coolGray-600">
               <a href="#">Python</a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Web Developement </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Machine Learning </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
             </div>
           </div>
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold">It & Software</h2>
             <div className="flex flex-col text-sm text-coolGray-600">
               <a href="#">Python</a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Web Developement </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Machine Learning </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
             </div>
           </div>
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold">Design</h2>
             <div className="flex flex-col text-sm text-coolGray-600">
               <a href="#">Python</a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Web Developement </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
               <a href="#">Machine Learning </a>
-              <p href="#">30,366,156 students </p>
+              <p>30,366,156 students </p>
             </div>
           </div>
         </div>

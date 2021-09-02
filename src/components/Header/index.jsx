@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-// Styles
 import "./style.css";
 
 export default function Header() {
@@ -20,11 +20,12 @@ export default function Header() {
   };
 
   const renderCourseCategories = () => {
-    return courseCategories.map((item, index) => {
+    return courseCategories?.map((item, index) => {
+      console.log(item);
       return (
         <li key={index}>
           <a className="flex items-center justify-between px-4 py-2" href="#">
-            {item.tenDanhMuc}
+            {item.danhMucKhoaHoc.tenDanhMucKhoaHoc}
             <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
           </a>
         </li>
@@ -77,38 +78,26 @@ export default function Header() {
             <button className="p-3">
               <i className="fas fa-search"></i>
             </button>
-            <input
-              className="bg-transparent w-full text-sm outline-none pl-1 pr-4"
-              placeholder="Search for anything"
-            />
+            <input className="form-control" placeholder="Search for anything" />
           </form>
-          <a href="#" className="p-3 text-sm hover-text-primary">
+          <a href="#" className="link">
             Udemy Business
           </a>
           <a href="#" className="p-3 text-sm hover-text-primary">
             Teach on Udemy
           </a>
-          <a href="#" className="p-3 text-sm hover-text-primary">
-            <i className="fas fa-cart-plus"></i>
-          </a>
-          <a
-            href="/login"
-            className="p-3 bg-white border border-black font-bold text-sm hover-bg-gray"
-          >
+          <button>
+            <i class="fas fa-cart-plus"></i>
+          </button>
+          <NavLink to="/signin" className="btn-outline font-bold">
             Log in
-          </a>
-          <a
-            href="/signup"
-            className="p-3 bg-black border border-black text-white font-bold text-sm"
-          >
+          </NavLink>
+          <NavLink to="/signup" className="btn-dark font-bold">
             Sign up
-          </a>
-          <a
-            href="#"
-            className="p-3 border border-black font-bold text-sm hover-bg-gray"
-          >
-            <i className="fas fa-globe-asia"></i>
-          </a>
+          </NavLink>
+          <button className="btn-outline font-bold">
+            <i class="fas fa-globe-asia"></i>
+          </button>
         </div>
       </nav>
       <nav
