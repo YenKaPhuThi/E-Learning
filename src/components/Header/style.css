@@ -10,20 +10,26 @@
   color: #a433f0;
 }
 
+.hover-bg-gray:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
 .bg-primary {
   background-color: #a433f0;
 }
 
-.hover-bg-gray:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+.bg-input {
+  background-color: #f7f9fa;
 }
 
 .box-shadow {
   box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
 }
 
-.input-group {
-  background-color: #f7f9fa;
-  border-radius: 5rem;
-  border: 1px solid #1c1d1f;
+.menu-popover {
+  display: none;
+}
+
+.hover-btn:hover + .menu-popover {
+  display: block;
 }

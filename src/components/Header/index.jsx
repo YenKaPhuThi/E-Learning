@@ -21,12 +21,10 @@ export default function Header() {
 
   const renderCourseCategories = () => {
     return courseCategories?.map((item, index) => {
-      console.log(item);
       return (
         <li key={index}>
-          <a className="flex items-center justify-between px-4 py-2" href="#">
-            {item.danhMucKhoaHoc.tenDanhMucKhoaHoc}
-            <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
+          <a href="#" className="block p-3 text-sm hover-text-primary">
+            {item.tenDanhMuc}
           </a>
         </li>
       );
@@ -70,35 +68,68 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <div className="hidden md:flex md:flex-1 md:items-center md:space-x-2">
-          <a href="#" className="p-3 text-sm hover-text-primary">
-            Categories
-          </a>
-          <form action="/" className="flex flex-1 input-group">
-            <button className="p-3">
-              <i className="fas fa-search"></i>
+        <ul className="hidden md:flex md:flex-1 md:items-center md:space-x-2">
+          <li className="relative">
+            <button className="p-3 text-sm hover-text-primary hover-btn">
+              Categories
             </button>
-            <input className="form-control" placeholder="Search for anything" />
-          </form>
-          <a href="#" className="link">
-            Udemy Business
-          </a>
-          <a href="#" className="p-3 text-sm hover-text-primary">
-            Teach on Udemy
-          </a>
-          <button>
-            <i class="fas fa-cart-plus"></i>
-          </button>
-          <NavLink to="/signin" className="btn-outline font-bold">
-            Log in
-          </NavLink>
-          <NavLink to="/signup" className="btn-dark font-bold">
-            Sign up
-          </NavLink>
-          <button className="btn-outline font-bold">
-            <i class="fas fa-globe-asia"></i>
-          </button>
-        </div>
+            <div className="absolute left-0 top-12 z-10 mt-4 menu-popover">
+              <div className="box-shadow">
+                <ul className="bg-white w-72">{renderCourseCategories()}</ul>
+              </div>
+            </div>
+          </li>
+          <li className="flex-1">
+            <form
+              action="/"
+              className="flex border border-black bg-input rounded-3xl w-full"
+            >
+              <button className="p-3">
+                <i className="fas fa-search"></i>
+              </button>
+              <input
+                className="flex-1 bg-transparent text-sm outline-none pl-1 pr-4"
+                placeholder="Search for anything"
+              />
+            </form>
+          </li>
+          <li>
+            <a href="#" className="p-3 text-sm hover-text-primary">
+              Udemy Business
+            </a>
+          </li>
+          <li>
+            <a href="#" className="p-3 text-sm hover-text-primary">
+              Teach on Udemy
+            </a>
+          </li>
+          <li>
+            <a href="#" className="p-3 text-sm hover-text-primary">
+              <i className="fas fa-cart-plus"></i>
+            </a>
+          </li>
+          <li>
+            <NavLink
+              to="/signin"
+              className="p-3 bg-white border border-black font-bold text-sm hover-bg-gray"
+            >
+              Log in
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/signup"
+              className="p-3 bg-black border border-black text-white font-bold text-sm"
+            >
+              Sign up
+            </NavLink>
+          </li>
+          <li>
+            <button className="p-3 border border-black font-bold text-sm hover-bg-gray">
+              <i class="fas fa-globe-asia"></i>
+            </button>
+          </li>
+        </ul>
       </nav>
       <nav
         className={`navbar-menu relative z-10 ${showNavbar ? "" : "hidden"}`}
@@ -111,24 +142,29 @@ export default function Header() {
         >
           <i className="fas fa-times fa-1x"></i>
         </button>
-        <div className="navbar-backdrop fixed inset-0 bg-black opacity-50" />
-        <div className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 max-w-sm bg-white border-r overflow-y-auto">
+        <div
+          className="navbar-backdrop fixed inset-0 bg-black opacity-50"
+          onClick={() => {
+            handleCloseNavbar();
+          }}
+        />
+        <div className="fixed top-0 left-0 bottom-0 flex flex-col w-64 md:w-72 bg-white border-r overflow-y-auto">
           <ul className="py-2 border-b border-gray-300">
             <li>
-              <a
-                href="/login"
+              <NavLink
+                to="/signin"
                 className="flex items-center justify-between px-4 py-2 text-primary"
               >
                 Log in
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a
-                href="/signup"
+              <NavLink
+                to="/signup"
                 className="flex items-center justify-between px-4 py-2 text-primary"
               >
                 Sign up
-              </a>
+              </NavLink>
             </li>
           </ul>
           <div>

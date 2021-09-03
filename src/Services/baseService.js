@@ -8,6 +8,8 @@ export class baseService {
         //         Authorization: "Bearer " + localStorage.getItem(TOKEN),
         //     });
         // }
+        const a = Axios;
+        console.log("a", a);
         return Axios({
             url: `${DOMAIN}/${url}`,
             method: "GET",
