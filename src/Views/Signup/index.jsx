@@ -1,9 +1,19 @@
 import { useFormik } from "formik";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+// import { history } from "../../App";
+import { useHistory } from "react-router";
 import Layout from "../../HOC/Layout";
+import { signUpAction } from "../../Redux/Actions/UserAction";
 
 export default function Signup() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const goToSignIn = () => {
+    return history.push("/signin");
+  };
+
   const formik = useFormik({
     initialValues: {
       taiKhoan: "",
@@ -14,6 +24,9 @@ export default function Signup() {
       email: "",
     },
     onSubmit: (values) => {
+      const action = signUpAction(values, goToSignIn);
+      dispatch(action);
+
       console.log("values", values);
     },
   });
@@ -35,6 +48,7 @@ export default function Signup() {
                 Tài Khoản
               </label>
               <input
+                required
                 name="taiKhoan"
                 onChange={formik.handleChange}
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
@@ -47,10 +61,11 @@ export default function Signup() {
                 Mật Khẩu
               </label>
               <input
+                required
                 name="matKhau"
                 onChange={formik.handleChange}
                 className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                type="text"
+                type="password"
                 placeholder="Mật Khẩu"
               />
             </div>
@@ -60,10 +75,11 @@ export default function Signup() {
                   Email
                 </label>
                 <input
+                  required
                   name="email"
                   onChange={formik.handleChange}
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                  type="text"
+                  type="email"
                   placeholder="Email"
                 />
               </div>
@@ -72,6 +88,7 @@ export default function Signup() {
                   Họ tên
                 </label>
                 <input
+                  required
                   name="hoTen"
                   onChange={formik.handleChange}
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
@@ -86,10 +103,11 @@ export default function Signup() {
                   Số Điện Thoại
                 </label>
                 <input
+                  required
                   name="soDT"
                   onChange={formik.handleChange}
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                  type="text"
+                  type="tel"
                   placeholder="Số điện thoại"
                 />
               </div>
@@ -98,6 +116,7 @@ export default function Signup() {
                   Mã Nhóm
                 </label>
                 <input
+                  required
                   name="maNhom"
                   onChange={formik.handleChange}
                   className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"

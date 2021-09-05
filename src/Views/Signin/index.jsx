@@ -5,16 +5,30 @@ import { Icon } from "@iconify/react";
 import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
+import { signInAction } from "../../Redux/Actions/UserAction";
+// import { history } from "../../App";
+import { useHistory } from "react-router";
+
 export default function Signin() {
+  const history = useHistory();
   const dispatch = useDispatch();
+  const goToHome = () => {
+    return history.push("/");
+  };
+
   const formik = useFormik({
     initialValues: {
       taiKhoan: "",
       matKhau: "",
     },
-    onSubmit: (values) => {
-      console.log("values", values);
-    },
+    onSubmit: useCallback(
+      (values) => {
+        console.log("values", values);
+        const action = signInAction(values, goToHome);
+        dispatch(action);
+      },
+      [dispatch]
+    ),
   });
 
   return (

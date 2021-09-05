@@ -1,35 +1,67 @@
 .text-primary {
-  color: #a433f0;
+    color: #a433f0;
 }
 
 .text-gray {
-  color: #6a6f73;
+    color: #6a6f73;
 }
 
 .hover-text-primary:hover {
-  color: #a433f0;
+    color: #a433f0;
 }
 
 .hover-bg-gray:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+    background-color: rgba(0, 0, 0, 0.04);
 }
 
 .bg-primary {
-  background-color: #a433f0;
+    background-color: #a433f0;
 }
 
 .bg-input {
-  background-color: #f7f9fa;
+    background-color: #f7f9fa;
+}
+
+.hover-bg-gray:hover {
+    background-color: rgba(0, 0, 0, 0.04);
 }
 
 .box-shadow {
-  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
 }
 
 .menu-popover {
-  display: none;
+    display: none;
 }
 
-.hover-btn:hover + .menu-popover {
-  display: block;
+.hover-btn:hover+.menu-popover {
+    display: block;
 }
+
+.input-group {
+    background-color: #f7f9fa;
+    border-radius: 5rem;
+    border: 1px solid #1c1d1f;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+/* .hover-name-content {
+    top: 5rem;
+    right: 2rem;
+    background: white;
+    opacity: 0;
+    transform: scaleY(0.8) skewX(10deg);
+    transform-origin: 50% 0%;
+    transition-duration: 0.25s;
+    z-index: 100;
+    position: absolute
+}
+
+.hover-name:hover+.hover-name-content {
+    opacity: 1;
+    transform: scaleY(1) skewX(0deg);
+} */
