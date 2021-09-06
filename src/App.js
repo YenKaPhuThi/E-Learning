@@ -1,6 +1,7 @@
 import { createBrowserHistory } from "history";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ListCourseSignIn from "./Components/ListCourseSignIn.jsx";
+
+import UpdateInforUser from "./Components/UpdateInforUser/index.jsx";
 import { AuthRoute, PrivateRoute } from "./HOC/Route/index.jsx";
 
 import Home from "./Views/Home";
@@ -25,9 +26,9 @@ function App() {
           Component={Signup}
         ></AuthRoute>
         <PrivateRoute
-          path="/danhsachKHdangki"
+          path="/chinhsuathongtin"
           redirectPath="/signin"
-          Component={ListCourseSignIn}
+          Component={UpdateInforUser}
         ></PrivateRoute>
       </Switch>
     </BrowserRouter>
