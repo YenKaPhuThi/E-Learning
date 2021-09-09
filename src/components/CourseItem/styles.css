@@ -1,0 +1,29 @@
+.voteIcon {
+  color: #e59819;
+  font-size: 10px;
+  padding: 0 2px 0 2px;
+}
+
+.voteIconGroup {
+  line-height: 10px;
+  margin: 0 3px 0 3px;
+}
+
+.voteScore {
+  color: #b4690e;
+}
+
+.author {
+  color: #6a6f73;
+  padding-top: 6px;
+}
+.voteQuantity {
+  color: #6a6f73;
+}
+
+.coureName {
+  line-height: 1.2;
+  letter-spacing: -0.02rem;
+  font-size: 18px;
+  font-weight: 700;
+}
