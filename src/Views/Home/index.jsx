@@ -16,6 +16,7 @@ import Banner from "../../Components/Banner";
 import Footer from "../../Components/Footer";
 import TopCateGories from "../../Components/TopCategories";
 import FeatureByCategory from "../../Components/FeatureByCategory";
+import CourseBoard from "../../Components/CourseBoard";
 
 // Util
 import { USER_LOGIN } from "../../util/settings/config";
@@ -93,11 +94,7 @@ export default function Home() {
     <>
       <Header />
       <Banner />
-      <div className="bg-gray-100 p-12">
-        <div className="grid grid-cols-2 mx-auto gap-x-6 gap-y-8 md:grid-cols-4">
-          {renderCourseList()}
-        </div>
-      </div>
+      <CourseBoard></CourseBoard>
       <TopCateGories />
       <Hero />
       <FeatureByCategory />

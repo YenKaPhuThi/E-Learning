@@ -1,0 +1,59 @@
+:root {
+  frimary: "#1c1d1f";
+  secondary: "#5624d0";
+  containerpadding: 24px;
+}
+
+/*
+ screen < 768px
+*/
+
+/* SUBJECT COMPONENT */
+
+.pointer {
+  cursor: pointer;
+}
+
+.subjectItemBorder {
+  border-top: lightgray 2px solid;
+  width: 100%;
+  height: 50px;
+}
+
+.subjectBoard {
+  border-bottom: lightgray 2px solid;
+}
+
+.subjectItem {
+  color: grey;
+  font-weight: 700;
+}
+.active {
+  color: black;
+}
+
+.nextArrow {
+  color: white;
+  background-color: black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+/* SUBJECT COMPONENT END */
+
+/*
+ screen < 600px
+*/
+
+@media only screen and (min-width: 600px) {
+}
+
+/*
+ screen > 768px
+*/
+
+@media only screen and (min-width: 768px) {
+}
