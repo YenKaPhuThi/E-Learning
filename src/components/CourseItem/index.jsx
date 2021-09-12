@@ -8,18 +8,22 @@ const CourseItem = (props) => {
 
     // render item kích cỡ bình thường cho các màn hình còn lại
     const renderOtherScreen = () => {
+        const { name, img, index } = props;
+        // const course = props.courseData
+        // console.log("CourseItem", index, name, img);
         return (
             <div>
                 <div class="flex items-center py-50">
                     <div class="max-w-xs bg-white overflow-hidden cursor-pointer py-4 pr-4">
 
                         <div>
-                            <img src="https://picsum.photos/400/300" alt="Dog" />
+                            <img src={img} alt="Dog" />
                         </div>
 
                         <div className="my-3">
                             <p className="coureName">
-                                {title.slice(0, 40)}...
+                                {name}
+                                {/* {title.slice(0, 40)}... */}
                             </p>
 
                             <p className="text-sm author">

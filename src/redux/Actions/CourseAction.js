@@ -6,7 +6,6 @@ export const fetchCourseList = () => {
   return async (dispatch) => {
     try {
       const result = await courseService.getCourseList();
-
       dispatch(createAction(actionCourseTypes.SET_COURSE_LIST, result.data));
     } catch (err) {
       console.log(err);
@@ -33,7 +32,6 @@ export const registerCourse = (dataRequest) => {
     try {
       const result = await courseService.registerCourse(dataRequest);
       alert("Đăng kí khóa học thành công");
-
     } catch (err) {
       console.log(err);
     }
@@ -45,7 +43,6 @@ export const reverseCourse = (dataRequest) => {
     try {
       const result = await courseService.reverseCourse(dataRequest);
       alert("Hủy khóa học thành công");
-
     } catch (err) {
       console.log(err);
     }

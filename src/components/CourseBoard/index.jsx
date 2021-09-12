@@ -1,5 +1,6 @@
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import CourseItem from "../CourseItem";
 import Slider from "react-slick";
 
@@ -14,6 +15,10 @@ const CourseBoard = () => {
   const breakpoint768 = 768;
   const breakpoint1024 = 1024;
   const breakpoint1400 = 1400;
+
+  const courseList = useSelector((state) => {
+    return state.course.courseList;
+  });
 
   // dùng xác định slider nào dùng button nào
   const selectedSlideRef = useRef();
@@ -559,6 +564,19 @@ const CourseBoard = () => {
     }
   }
 
+  const renderCourseList = () => {
+    return courseList.map((item, index) => {
+      // const course = { data: item, index: index }
+      return (
+        <div key={index}>
+          {/* <CourseItem courseData={course}></CourseItem> */}
+          <CourseItem name={item.tenKhoaHoc} img={item.hinhAnh} index={index}></CourseItem>
+
+        </div>
+      );
+    });
+  };
+
   // render slider các khóa học ngẫu nhiên
   const renderRandomCourse = (isSmallSize) => {
     return (
@@ -572,49 +590,18 @@ const CourseBoard = () => {
 
         <div>
           <Slider ref={randomSlideRef} {...randomCourseSliderSetting}>
-            <div key={1}>
+            {/* <div key={1}>
               <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={2}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={3}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={4}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={5}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={6}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-
-            <div key={7}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={8}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={9}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={10}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={11}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
-            <div key={12}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div>
+            </div> */}
+            {renderCourseList()}
           </Slider>
         </div>
 
       </div>
     )
   }
+
+
   //--------------------***--------------------
 
 
