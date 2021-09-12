@@ -20,6 +20,7 @@ import CourseBoard from "../../Components/CourseBoard";
 
 // Util
 import { USER_LOGIN } from "../../util/settings/config";
+import { getInforUserAction } from "../../Redux/Actions/UserAction";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchCourseList());
     dispatch(fetchCourseCategories());
+    dispatch(getInforUserAction());
   }, [dispatch]);
 
   const courseList = useSelector((state) => {

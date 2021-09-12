@@ -1,5 +1,6 @@
 import { createBrowserHistory } from "history";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import MyLearning from "./Components/MyLearning/index.jsx";
 
 import UpdateInforUser from "./Components/UpdateInforUser/index.jsx";
 import { AuthRoute, PrivateRoute } from "./HOC/Route/index.jsx";
@@ -29,6 +30,11 @@ function App() {
           path="/chinhsuathongtin"
           redirectPath="/signin"
           Component={UpdateInforUser}
+        ></PrivateRoute>
+        <PrivateRoute
+          path="/mylearning"
+          Component={MyLearning}
+          redirectPath="/signIn"
         ></PrivateRoute>
       </Switch>
     </BrowserRouter>

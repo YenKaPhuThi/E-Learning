@@ -1,32 +1,47 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+
 import Layout from "../../HOC/Layout";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { USER_LOGIN } from "../../util/settings/config";
+
+import {
+  getInforUserAction,
+  updateInforAction,
+} from "../../Redux/Actions/UserAction";
 
 export default function UpdateInforUser() {
   const history = useHistory();
+  const dispatch = useDispatch();
   // const dispatch = useDispatch();
   // const goToSignIn = () => {
   //   return history.push("/signin");
   // };
-  const user = JSON.parse(localStorage.getItem(USER_LOGIN));
-  console.log(user);
+  useEffect(() => {
+    dispatch(getInforUserAction());
+  }, [dispatch]);
+
+  const user = useSelector((state) => state.user.userLogin);
+
+  const goToHome = () => {
+    history.push("/");
+  };
 
   const formik = useFormik({
     initialValues: {
       taiKhoan: user.taiKhoan,
       matKhau: user.matKhau,
       hoTen: user.hoTen,
-      soDT: user.soDT,
+      soDT: user?.soDT,
       maNhom: user.maNhom,
       email: user.email,
       maLoaiNguoiDung: user.maLoaiNguoiDung,
     },
+
     onSubmit: (values) => {
       console.log("values", values);
+      const action = updateInforAction(values, goToHome);
+      dispatch(action);
     },
   });
   return (
@@ -37,7 +52,7 @@ export default function UpdateInforUser() {
           className="my-20  flex justify-center items-center"
           onSubmit={formik.handleSubmit}
         >
-          <div className="py-12 px-12 bg-white rounded-2xl  z-20">
+          <div className="py-12 px-12 bg-white rounded-2xl">
             <div>
               <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
                 Update Your Account
@@ -152,15 +167,8 @@ export default function UpdateInforUser() {
 
             <div className="text-center mt-6">
               <button className="py-3 w-64 text-xl text-white bg-purple-600 rounded-2xl">
-                Sign Up
+                Update your Infor
               </button>
-              <p className="mt-4 text-sm">
-                Already Have An Account?{" "}
-                <NavLink to="/signin" className="underline cursor-pointer">
-                  {" "}
-                  Sign In
-                </NavLink>
-              </p>
             </div>
           </div>
         </form>
