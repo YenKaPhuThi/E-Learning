@@ -16,7 +16,7 @@ export class CourseService extends baseService {
 
   reverseCourse = (dataRequest) => {
     this.post("api/QuanLyKhoaHoc/HuyGhiDanh", dataRequest);
-  }
+  };
 }
 
 export const courseService = new CourseService();
