@@ -1,11 +1,14 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+
 import Layout from "../../HOC/Layout";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { USER_LOGIN } from "../../util/settings/config";
-import { updateInforAction } from "../../Redux/Actions/UserAction";
+
+import {
+  getInforUserAction,
+  updateInforAction,
+} from "../../Redux/Actions/UserAction";
 
 export default function UpdateInforUser() {
   const history = useHistory();
@@ -14,6 +17,10 @@ export default function UpdateInforUser() {
   // const goToSignIn = () => {
   //   return history.push("/signin");
   // };
+  useEffect(() => {
+    dispatch(getInforUserAction());
+  }, [dispatch]);
+
   const user = useSelector((state) => state.user.userLogin);
 
   const goToHome = () => {
@@ -25,7 +32,7 @@ export default function UpdateInforUser() {
       taiKhoan: user.taiKhoan,
       matKhau: user.matKhau,
       hoTen: user.hoTen,
-      soDT: user?.soDt,
+      soDT: user?.soDT,
       maNhom: user.maNhom,
       email: user.email,
       maLoaiNguoiDung: user.maLoaiNguoiDung,

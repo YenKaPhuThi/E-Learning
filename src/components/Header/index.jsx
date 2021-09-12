@@ -13,8 +13,9 @@ export default function Header() {
     return state.user.userLogin;
   });
 
-  console.log(userLogin);
+  const { chiTietKhoaHocGhiDanh } = userLogin;
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showNavbarMenu, setShowNavbarMenu] = useState(true);
 
   const courseCategories = useSelector((state) => {
     return state.course.courseCategories;
@@ -27,14 +28,16 @@ export default function Header() {
   const handleCloseNavbar = () => {
     setShowNavbar(false);
   };
+  const handleNavbarMenu = () => {
+    setShowNavbarMenu(!showNavbarMenu);
+  };
 
   const renderCourseCategories = () => {
     return courseCategories?.map((item, index) => {
       return (
         <li key={index}>
-          <a className="flex items-center justify-between px-4 py-2" href="#">
-            {item.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
-            <i className="fas fa-chevron-right fa-xs p-1 ml-3"></i>
+          <a href="#" className="block p-3 text-sm hover-text-primary">
+            {item.tenDanhMuc}
           </a>
         </li>
       );
@@ -73,33 +76,60 @@ export default function Header() {
             <button className="relative p-3">
               <i class="fas fa-cart-plus"></i>
               <span class="absolute -right-1 top-0 text-xs bg-primary text-white font-bold py-1 px-2 rounded-full">
-                3
+                {chiTietKhoaHocGhiDanh?.length}
               </span>
             </button>
           </div>
         </div>
-        <div className="hidden md:flex md:flex-1 md:items-center md:space-x-2">
-          <a href="#" className="p-3 text-sm hover-text-primary">
-            Categories
-          </a>
-          <form action="/" className="flex flex-1 input-group">
-            <button className="p-3">
-              <i className="fas fa-search"></i>
+        <ul className="hidden md:flex md:flex-1 md:items-center md:space-x-2">
+          <li className="relative">
+            <button className="p-3 text-sm hover-text-primary hover-btn">
+              Categories
             </button>
-            <input className="form-control" placeholder="Search for anything" />
-          </form>
-          <a href="#" className="link">
-            Udemy Business
-          </a>
-          <a href="#" className="p-3 text-sm hover-text-primary">
-            Teach on Udemy
-          </a>
-          <button className="pr-5">
-            <i class="fas fa-cart-plus"></i>
-          </button>
+            <div className="absolute left-0 z-10 menu-popover">
+              <div className="box-shadow">
+                <ul className="bg-white w-72">{renderCourseCategories()}</ul>
+              </div>
+            </div>
+          </li>
+          <li className="flex-1">
+            <form
+              action="/"
+              className="flex border border-black bg-input rounded-3xl w-full"
+            >
+              <button className="p-3">
+                <i className="fas fa-search"></i>
+              </button>
+              <input
+                className="flex-1 bg-transparent text-sm outline-none pl-1 pr-4"
+                placeholder="Search for anything"
+              />
+            </form>
+          </li>
+          <li>
+            <a href="#" className="p-3 text-sm hover-text-primary">
+              Udemy Business
+            </a>
+          </li>
+          <li>
+            <a href="#" className="p-3 text-sm hover-text-primary">
+              Teach on Udemy
+            </a>
+          </li>
+          <li>
+            <NavLink
+              to="/mylearning"
+              className="relative p-3 text-sm hover-text-primary"
+            >
+              <i className="fas fa-cart-plus"></i>
+              <span class="absolute -right-1 top-0 text-xs bg-primary text-white font-bold py-1 px-2 rounded-full">
+                {chiTietKhoaHocGhiDanh?.length}
+              </span>
+            </NavLink>
+          </li>
 
           {accessToken ? (
-            <div className=" dropdown inline-block relative">
+            <li className="dropdown inline-block relative pl-5">
               <div className="flex items-center justify-items-center">
                 <img
                   className="w-10 h-10 rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
@@ -159,7 +189,7 @@ export default function Header() {
                             />
                           </svg>
                           <span className="text-coolGray-600">
-                            api bị lỗi r
+                            {userLogin?.soDT}
                           </span>
                         </span>
                       </div>
@@ -169,7 +199,7 @@ export default function Header() {
                 <hr />
                 <li className="hover:text-purple-400">
                   <NavLink
-                    to="/chinhsuathongtin"
+                    to="/mylearning"
                     className="max-w-md py-2 px-8 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
                     My learning
@@ -197,24 +227,28 @@ export default function Header() {
                   </NavLink>
                 </li>
               </ul>
-            </div>
+            </li>
           ) : (
             <>
-              {" "}
-              <NavLink to="/signin" className="btn-outline font-bold">
-                Log in
-              </NavLink>
-              <NavLink to="/signup" className="btn-dark font-bold">
-                Sign up
-              </NavLink>
+              <li>
+                <NavLink to="/signin" className="btn-outline font-bold">
+                  Log in
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup" className="btn-dark font-bold">
+                  Sign up
+                </NavLink>
+              </li>
             </>
           )}
 
           <button className="btn-outline font-bold pl-5 ">
             <i class="fas fa-globe-asia"></i>
           </button>
-        </div>
+        </ul>
       </nav>
+
       <nav
         className={`navbar-menu relative z-10 ${showNavbar ? "" : "hidden"}`}
       >
@@ -227,7 +261,10 @@ export default function Header() {
           <i className="fas fa-times fa-1x"></i>
         </button>
         <div className="navbar-backdrop fixed inset-0 bg-black opacity-50" />
-        <div className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 max-w-sm bg-white border-r overflow-y-auto">
+        <div
+          className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 max-w-sm bg-white border-r overflow-y-auto"
+          style={{ maxWidth: "45%" }}
+        >
           <ul className=" border-b border-gray-300 p-4 bg-gray-100">
             {accessToken ? (
               <li className="bg-gray-100 ">
@@ -236,12 +273,35 @@ export default function Header() {
                     className="w-10 h-10 rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
                     src="https://source.unsplash.com/100x100/?portrait"
                   ></img>
-                  <div className="pl-5">
-                    <span className="btn-outline font-bold  ">
-                      Hi {userLogin?.hoTen}
-                    </span>
-                    <br></br>
-                    <span>welcome to comeback !</span>
+                  <div className="flex ">
+                    <div className="pl-5">
+                      <span className="btn-outline font-bold  ">
+                        Hi {userLogin?.hoTen}
+                      </span>
+                      <br></br>
+                      <span>welcome to comeback </span>
+                    </div>
+                    <div
+                      className="ml-2"
+                      onClick={() => {
+                        handleNavbarMenu();
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -268,11 +328,74 @@ export default function Header() {
             )}
           </ul>
           <div>
-            <h5 className="font-bold text-gray text-sm px-4 pt-4">
+            <h5 className="font-bold text-gray text-sm px-3 pt-4">
               Most popular
             </h5>
             <ul>{renderCourseCategories()}</ul>
           </div>
+        </div>
+        <div
+          className={`  fixed top-0 left-0 bottom-0 flex flex-col md:min-w-72 max-w-sm   border-r overflow-y-auto
+          ${showNavbarMenu ? "hidden" : ""}`}
+          style={{ maxWidth: "45%" }}
+        >
+          <div className=" border-b  border-gray-300 p-4 bg-gray-100 ">
+            <div
+              className=" flex "
+              onClick={() => {
+                handleNavbarMenu();
+              }}
+            >
+              <span className="mx-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </span>{" "}
+              Menu
+            </div>
+          </div>
+          <ul className=" border-b h-full bg-white border-gray-300 p-4">
+            <li className="hover:text-purple-400">
+              <NavLink
+                to="/mylearning"
+                className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
+              >
+                My learning
+              </NavLink>
+            </li>
+            <li className="hover:text-purple-400">
+              <NavLink
+                to="/chinhsuathongtin"
+                className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
+              >
+                Change profile
+              </NavLink>
+            </li>
+
+            <hr />
+            <li className="hover:text-purple-400">
+              <NavLink
+                to="/"
+                onClick={() => {
+                  localStorage.removeItem(TOKEN);
+                }}
+                className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
+              >
+                Sign out
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>

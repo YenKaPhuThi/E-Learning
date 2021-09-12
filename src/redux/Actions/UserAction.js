@@ -1,5 +1,6 @@
 import { userService } from "../../Services/UserService";
 import {
+    GET_INFOR_USER,
     SIGN_IN_ACTION,
     SIGN_UP_ACTION,
     UPDATE_INFOR_ACTION,
@@ -31,6 +32,16 @@ export const signUpAction = (thongTinDangKi, callBack) => {
         } catch (err) {
             console.log(err);
             alert(err.response.data);
+        }
+    };
+};
+export const getInforUserAction = () => {
+    return async(dispatch) => {
+        try {
+            const result = await userService.getInforUser();
+            dispatch(createAction(GET_INFOR_USER, result.data));
+        } catch (err) {
+            console.log(err);
         }
     };
 };
