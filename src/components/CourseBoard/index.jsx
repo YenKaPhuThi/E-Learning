@@ -22,15 +22,14 @@ const CourseBoard = () => {
 
   // dùng xác định slider nào dùng button nào
   const selectedSlideRef = useRef();
-  const randomSlideRef = useRef();
+  const allSlideRef = useRef();
 
   // flag xác định kích thước item khóa học
   const isCourseSmallSize = true;
 
-  // mọi người coi giừm cái useEffect này xài chỗ nào
-  // mà xóa nó thì màn hình phone nhỏ bị lỗi :)
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
+
     // subscribe to window resize event "onComponentDidMount"
     window.addEventListener("resize", handleResizeWindow);
     return () => {
@@ -56,7 +55,7 @@ const CourseBoard = () => {
     if (course === "selectCourse") {
       selectedSlideRef.current.slickNext();
     } else {
-      randomSlideRef.current.slickNext();
+      allSlideRef.current.slickNext();
     }
 
   }
@@ -65,7 +64,7 @@ const CourseBoard = () => {
     if (course === "selectCourse") {
       selectedSlideRef.current.slickPrev();
     } else {
-      randomSlideRef.current.slickPrev();
+      allSlideRef.current.slickPrev();
     }
   }
   //--------------------***--------------------
@@ -86,25 +85,37 @@ const CourseBoard = () => {
         breakpoint: 550,
         settings: {
           slidesToShow: 1.2,
+          slidesToScroll: 1,
         }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1.5,
+          slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 769,
+        breakpoint: 770,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 2,
+
         }
       },
       {
         breakpoint: 1400,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 1750,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
           infinite: true,
         }
       },
@@ -112,59 +123,52 @@ const CourseBoard = () => {
   };
 
   // slider khóa học ngẫu nhiên
-  const randomCourseSliderSetting = {
+  const allCourseSliderSetting = {
     slidesToScroll: 1,
     slidesToShow: 1.2,
     initialSlide: 0,
-    rows: 3,
     infinite: false,
     responsive: [
       {
         breakpoint: 425,
         settings: {
           slidesToShow: 1.4,
+          rows: 3,
         }
       },
       {
         breakpoint: 550,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
+          rows: 3,
         }
       },
-
       {
-        breakpoint: 601,
+        breakpoint: 650,
         settings: {
           slidesToShow: 1.5,
-          rows: 1,
         }
       },
       {
-        breakpoint: 769,
+        breakpoint: 770,
         settings: {
           slidesToShow: 3,
-          rows: 1,
+          slidesToScroll: 2,
         }
       },
       {
         breakpoint: 1025,
         settings: {
           slidesToShow: 4,
-          rows: 1,
+          slidesToScroll: 2,
         }
       },
       {
-        breakpoint: 1025,
-        settings: {
-          slidesToShow: 4,
-          rows: 1,
-        }
-      },
-      {
-        breakpoint: 1400,
+        breakpoint: 1750,
         settings: {
           slidesToShow: 5,
-          rows: 1,
+          slidesToScroll: 2,
         }
       },
     ]
@@ -262,29 +266,8 @@ const CourseBoard = () => {
         </>
 
         <Slider ref={selectedSlideRef} {...sliderSetting}>
-          <div key={1}>
-            <CourseItem></CourseItem>
-          </div>
+          {renderCourseList()}
 
-          <div key={2}>
-            <CourseItem></CourseItem>
-          </div>
-
-          <div key={3}>
-            <CourseItem></CourseItem>
-          </div>
-
-          <div key={4}>
-            <CourseItem></CourseItem>
-          </div>
-
-          <div key={5}>
-            <CourseItem></CourseItem>
-          </div>
-
-          <div key={6}>
-            <CourseItem></CourseItem>
-          </div>
         </Slider>
 
       </div>
@@ -374,36 +357,36 @@ const CourseBoard = () => {
       <div className="flex">
         <div
           onClick={() => { handleActiveCourse("Python"); setInactiveSubject(); set_PythonSubject_Clicked(!is_PythonSubject_Clicked) }}
-          className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}>Python</div>
+          className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}>Python</div>
 
         <div
           onClick={() => { handleActiveCourse("Excel"); setInactiveSubject(); set_ExcelSubject_Clicked(!is_ExcelSubject_Clicked) }}
-          className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+          className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
         >Excel</div>
 
         <div
           onClick={() => { handleActiveCourse("WebDevelopment"); setInactiveSubject(); set_WebDevSubject_Clicked(!is_WebDevSubject_Clicked) }}
-          className={`${is_WebDevSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+          className={`${is_WebDevSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
         >Web Development</div>
 
         <div
           onClick={() => { handleActiveCourse("JavaScript"); setInactiveSubject(); set_JavaScriptSubject_Clicked(!is_JavaScriptSubject_Clicked) }}
-          className={`${is_JavaScriptSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+          className={`${is_JavaScriptSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
         >JavaScript</div>
 
         <div
           onClick={() => { handleActiveCourse("DataScience"); setInactiveSubject(); set_DataScienceSubject_Clicked(!is_DataScienceSubject_Clicked) }}
-          className={`${is_DataScienceSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+          className={`${is_DataScienceSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
         >Data Science</div>
 
         <div
           onClick={() => { handleActiveCourse("AWSCertification"); setInactiveSubject(); set_AWSSubject_Clicked(!is_AWSSubject_Clicked) }}
-          className={`${is_AWSSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+          className={`${is_AWSSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
         >AWS Certification</div>
 
         <div
           onClick={() => { handleActiveCourse("Drawing"); setInactiveSubject(); set_DrawingSubject_Clicked(!is_DrawingSubject_Clicked) }}
-          className={`${is_DrawingSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+          className={`${is_DrawingSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
         >Drawing</div>
       </div>
     )
@@ -418,36 +401,36 @@ const CourseBoard = () => {
             <Slider {...sliderSetting}>
               <div
                 onClick={() => { handleActiveCourse("Python"); setInactiveSubject(); set_PythonSubject_Clicked(!is_PythonSubject_Clicked) }}
-                className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}>Python</div>
+                className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}>Python</div>
 
               <div
                 onClick={() => { handleActiveCourse("Excel"); setInactiveSubject(); set_ExcelSubject_Clicked(!is_ExcelSubject_Clicked) }}
-                className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+                className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
               >Excel</div>
 
               <div
                 onClick={() => { handleActiveCourse("WebDevelopment"); setInactiveSubject(); set_WebDevSubject_Clicked(!is_WebDevSubject_Clicked) }}
-                className={`${is_WebDevSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+                className={`${is_WebDevSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
               >Web Development</div>
 
               <div
                 onClick={() => { handleActiveCourse("JavaScript"); setInactiveSubject(); set_JavaScriptSubject_Clicked(!is_JavaScriptSubject_Clicked) }}
-                className={`${is_JavaScriptSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+                className={`${is_JavaScriptSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
               >JavaScript</div>
 
               <div
                 onClick={() => { handleActiveCourse("DataScience"); setInactiveSubject(); set_DataScienceSubject_Clicked(!is_DataScienceSubject_Clicked) }}
-                className={`${is_DataScienceSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+                className={`${is_DataScienceSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
               >Data Science</div>
 
               <div
                 onClick={() => { handleActiveCourse("AWSCertification"); setInactiveSubject(); set_AWSSubject_Clicked(!is_AWSSubject_Clicked) }}
-                className={`${is_AWSSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+                className={`${is_AWSSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
               >AWS Certification</div>
 
               <div
                 onClick={() => { handleActiveCourse("Drawing"); setInactiveSubject(); set_DrawingSubject_Clicked(!is_DrawingSubject_Clicked) }}
-                className={`${is_DrawingSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 subjectItem`}
+                className={`${is_DrawingSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
               >Drawing</div>
             </Slider>
           ) : (
@@ -564,43 +547,37 @@ const CourseBoard = () => {
     }
   }
 
-  const renderCourseList = () => {
+  // isSmallSize={isCourseSmallSize}
+  const renderCourseList = (isCourseSmallSize) => {
     return courseList.map((item, index) => {
-      // const course = { data: item, index: index }
       return (
         <div key={index}>
-          {/* <CourseItem courseData={course}></CourseItem> */}
-          <CourseItem name={item.tenKhoaHoc} img={item.hinhAnh} index={index}></CourseItem>
-
-        </div>
+          <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
+        </div >
       );
-    });
-  };
+    })
+  }
 
   // render slider các khóa học ngẫu nhiên
-  const renderRandomCourse = (isSmallSize) => {
+  const renderAllCourse = (isCourseSmallSize) => {
     return (
       <div className="my-12">
         <h3 className="font-bold text-2xl text-lg-4xl flex justify-between">
           Students are viewing
           <div>
-            {(width >= breakpoint1024) ? setSlideButton("randomCourse") : (<></>)}
+            {(width >= breakpoint1024) ? setSlideButton("allCourse") : (<></>)}
           </div>
         </h3>
 
         <div>
-          <Slider ref={randomSlideRef} {...randomCourseSliderSetting}>
-            {/* <div key={1}>
-              <CourseItem isSmallSize={isSmallSize}></CourseItem>
-            </div> */}
-            {renderCourseList()}
+          <Slider ref={allSlideRef} {...allCourseSliderSetting}>
+            {renderCourseList(isCourseSmallSize)}
           </Slider>
         </div>
 
       </div>
     )
   }
-
 
   //--------------------***--------------------
 
@@ -654,7 +631,7 @@ const CourseBoard = () => {
           {renderDropdownCourse(is_DrawingSubject_Clicked)}
         </div>
         <div>
-          {renderRandomCourse(isCourseSmallSize)}
+          {renderAllCourse(isCourseSmallSize)}
         </div>
       </div>
 
@@ -669,7 +646,7 @@ const CourseBoard = () => {
 
         </div>
         <div>
-          {renderRandomCourse()}
+          {renderAllCourse()}
         </div>
       </div>
     );
@@ -686,7 +663,7 @@ const CourseBoard = () => {
           {renderSubjectList(subjectSliderSetting)}
         </div>
         <div>
-          {renderRandomCourse()}
+          {renderAllCourse()}
         </div>
       </div>
     );
@@ -703,15 +680,16 @@ const CourseBoard = () => {
           {renderSubjectList(subjectSliderSetting)}
         </div>
         <div>
-          {renderRandomCourse()}
+          {renderAllCourse()}
         </div>
       </div>
     );
   }
   //--------------------***--------------------
 
+  // "px-6"
   return (
-    <div className="px-6">
+    <div className={`${width > breakpoint1400 ? 'px-48' : 'px-6'}`}>
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :

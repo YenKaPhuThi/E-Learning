@@ -6,23 +6,32 @@ const CourseItem = (props) => {
     const title = "2021 Complete Python Bootcamp From Zero to Hero in Python";
     const isSmallSize = props.isSmallSize;
 
+    // Destructuring
+    // const { hinhAnh, tenKhoaHoc } = props.data;
+    // console.log(hinhAnh, tenKhoaHoc)
+    // output: undefined
+
+    // Optional Chaining
+
+    // console.log(tenKhoaHoc, hinhAnh,);
+    // output: ok   
+
     // render item kích cỡ bình thường cho các màn hình còn lại
     const renderOtherScreen = () => {
-        const { name, img, index } = props;
-        // const course = props.courseData
-        // console.log("CourseItem", index, name, img);
+        const hinhAnh = props.data?.hinhAnh;
+        const tenKhoaHoc = props.data?.tenKhoaHoc;
         return (
             <div>
                 <div class="flex items-center py-50">
                     <div class="max-w-xs bg-white overflow-hidden cursor-pointer py-4 pr-4">
 
                         <div>
-                            <img src={img} alt="Dog" />
+                            <img src={hinhAnh} className="courseImg" alt="Dog" />
                         </div>
 
                         <div className="my-3">
                             <p className="coureName">
-                                {name}
+                                {tenKhoaHoc}
                                 {/* {title.slice(0, 40)}... */}
                             </p>
 
