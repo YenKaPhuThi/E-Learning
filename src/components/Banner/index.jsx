@@ -10,10 +10,6 @@ export default function Banner() {
       <div className="box-shadow bg-white py-4 px-6 md:py-6 md:w-96 md-absolute-x-center">
         <h1 className="title font-bold mb-2">Learning that gets you</h1>
         <p className="md:text-lg">Skills for your present (and your future). Get started.</p>
-        <button className="flex items-center justify-between p-3 w-full border border-black mt-4">
-          <span className="text-gray">What do you want to learn?</span>
-          <i className="fas fa-search"></i>
-        </button>
       </div>
     </div>
   );
