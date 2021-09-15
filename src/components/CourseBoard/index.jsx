@@ -536,6 +536,7 @@ const CourseBoard = () => {
   }
 
   // isSmallSize={isCourseSmallSize}
+  //
   const renderCourseList = useCallback(
     (isCourseSmallSize) => {
       return courseList.map((item, index) => {
@@ -545,7 +546,7 @@ const CourseBoard = () => {
           </div >
         );
       })
-    }, [activeSubject]
+    }
   );
 
   // render slider các khóa học ngẫu nhiên
@@ -568,8 +569,6 @@ const CourseBoard = () => {
       </div>
     )
   }
-
-
   //--------------------***--------------------
 
 
