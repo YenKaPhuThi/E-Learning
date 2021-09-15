@@ -1,13 +1,31 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
-import { TOKEN } from "../../util/settings/config";
 
+// Styles
 import "./style.css";
 
-export default function Header() {
+import { isEmpty } from "lodash";
+// Ultil
+import { TOKEN } from "../../util/settings/config";
+
+// Redux store
+import { searchCourse } from "../../Redux/Actions/CourseAction";
+
+export default function Header(props) {
+  const dispatch = useDispatch();
+
+  const [searchValue, setSearchValue] = useState("");
+
+  const history = useHistory();
+
+  const goToSearch = () => {
+    return history.push("/search");
+  };
+
   const accessToken = localStorage.getItem(TOKEN);
   const userLogin = useSelector((state) => {
     return state.user.userLogin;
@@ -16,6 +34,7 @@ export default function Header() {
   const { chiTietKhoaHocGhiDanh } = userLogin;
   const [showNavbar, setShowNavbar] = useState(false);
   const [showNavbarMenu, setShowNavbarMenu] = useState(true);
+  const [showHideSearchBox, setShowSearchBox] = useState(false);
 
   const courseCategories = useSelector((state) => {
     return state.course.courseCategories;
@@ -28,8 +47,29 @@ export default function Header() {
   const handleCloseNavbar = () => {
     setShowNavbar(false);
   };
+
   const handleNavbarMenu = () => {
     setShowNavbarMenu(!showNavbarMenu);
+  };
+
+  const handleShowHideSearchBox = () => {
+    setShowSearchBox(!showHideSearchBox);
+  };
+
+  const handleChange = (evt) => {
+    setSearchValue(evt.target.value);
+  };
+
+  const handleSearchCourse = () => {
+    if (isEmpty(searchValue)) {
+      return;
+    }
+
+    const dataRequest = {
+      tenKhoaHoc: searchValue,
+    };
+
+    dispatch(searchCourse(dataRequest.tenKhoaHoc, goToSearch));
   };
 
   const renderCourseCategories = () => {
@@ -70,7 +110,12 @@ export default function Header() {
             />
           </a>
           <div className="md:hidden">
-            <button className="p-3">
+            <button
+              className="p-3"
+              onClick={() => {
+                handleShowHideSearchBox();
+              }}
+            >
               <i className="fas fa-search"></i>
             </button>
             <button className="relative p-3">
@@ -95,14 +140,22 @@ export default function Header() {
           <li className="flex-1">
             <form
               action="/"
+              onSubmit={(event) => {
+                event.preventDefault();
+                handleSearchCourse();
+              }}
               className="flex border border-black bg-input rounded-3xl w-full"
             >
-              <button className="p-3">
+              <button type="submit" className="p-3">
                 <i className="fas fa-search"></i>
               </button>
               <input
-                className="flex-1 bg-transparent text-sm outline-none pl-1 pr-4"
+                className="flex-1 bg-transparent rounded-r-3xl text-sm outline-none pl-1 pr-4"
                 placeholder="Search for anything"
+                type="text"
+                name="searchInput"
+                value={searchValue}
+                onChange={handleChange}
               />
             </form>
           </li>
@@ -146,7 +199,7 @@ export default function Header() {
                     <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
                       <img
                         src="https://source.unsplash.com/100x100/?portrait"
-                        alt
+                        alt="Avatar image"
                         className="object-cover object-center w-full h-full rounded"
                       />
                     </div>
@@ -249,9 +302,7 @@ export default function Header() {
         </ul>
       </nav>
 
-      <nav
-        className={`navbar-menu relative z-10 ${showNavbar ? "" : "hidden"}`}
-      >
+      <nav className={`relative z-10 ${showNavbar ? "" : "hidden"}`}>
         <button
           className="absolute left-72 -top-14 bg-white w-12 h-12 m-4 z-10 rounded-full"
           onClick={() => {
@@ -398,6 +449,41 @@ export default function Header() {
           </ul>
         </div>
       </nav>
+
+      <div
+        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${
+          showHideSearchBox ? "" : "hidden"
+        }`}
+      >
+        <form
+          action="/"
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleSearchCourse();
+          }}
+          className="flex border-b-search w-full px-3 py-1"
+        >
+          <button type="submit" className="p-3">
+            <i className="fas fa-search"></i>
+          </button>
+          <input
+            className="flex-1 bg-transparent text-sm outline-none px-1"
+            placeholder="Search for anything"
+            type="text"
+            name="searchInput"
+            value={searchValue}
+            onChange={handleChange}
+          />
+          <button
+            className="p-3"
+            onClick={() => {
+              handleShowHideSearchBox();
+            }}
+          >
+            <i className="fas fa-times fa-1x"></i>
+          </button>
+        </form>
+      </div>
     </header>
   );
 }

@@ -8,6 +8,8 @@ import { AuthRoute, PrivateRoute } from "./HOC/Route/index.jsx";
 import Home from "./Views/Home";
 import Signin from "./Views/Signin";
 import Signup from "./Views/Signup";
+import Search from "./Views/Search";
+
 
 export const history = createBrowserHistory();
 
@@ -35,6 +37,11 @@ function App() {
           path="/mylearning"
           Component={MyLearning}
           redirectPath="/signIn"
+        ></PrivateRoute>
+         <PrivateRoute
+          path="/search"
+          Component={Search}
+          redirectPath="/"
         ></PrivateRoute>
       </Switch>
     </BrowserRouter>

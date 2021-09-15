@@ -11,7 +11,7 @@ export default function Banner() {
         <h1 className="title font-bold mb-2">Learning that gets you</h1>
         <p className="md:text-lg">Skills for your present (and your future). Get started.</p>
         <button className="flex items-center justify-between p-3 w-full border border-black mt-4">
-          <span className="text-nevada">What do you want to learn?</span>
+          <span className="text-gray">What do you want to learn?</span>
           <i className="fas fa-search"></i>
         </button>
       </div>
