@@ -7,7 +7,6 @@ import {
   fetchCourseCategories,
   registerCourse,
   reverseCourse,
-  searchCourse,
 } from "../../Redux/Actions/CourseAction";
 
 // Components
