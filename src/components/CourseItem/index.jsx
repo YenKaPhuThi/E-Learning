@@ -7,26 +7,24 @@ const CourseItem = (props) => {
     const isSmallSize = props.isSmallSize;
 
     // Destructuring
-    // const { hinhAnh, tenKhoaHoc } = props.data;
-    // console.log(hinhAnh, tenKhoaHoc)
-    // output: undefined
+    const { hinhAnh, tenKhoaHoc } = props.data;
+    // console.log(index, hinhAnh, tenKhoaHoc)
 
     // Optional Chaining
-
+    // const hinhAnh = props.data?.hinhAnh;
+    // const tenKhoaHoc = props.data?.tenKhoaHoc;
     // console.log(tenKhoaHoc, hinhAnh,);
-    // output: ok   
 
     // render item kích cỡ bình thường cho các màn hình còn lại
     const renderOtherScreen = () => {
-        const hinhAnh = props.data?.hinhAnh;
-        const tenKhoaHoc = props.data?.tenKhoaHoc;
         return (
             <div>
                 <div class="flex items-center py-50">
                     <div class="max-w-xs bg-white overflow-hidden cursor-pointer py-4 pr-4">
 
                         <div>
-                            <img src={hinhAnh} className="courseImg" alt="Dog" />
+                            {/* <img className="courseImg" alt="course image" /> */}
+                            <img src={hinhAnh} className="courseImg" alt="course image" />
                         </div>
 
                         <div className="my-3">
@@ -66,10 +64,9 @@ const CourseItem = (props) => {
     const renderSmallPhoneScreen = () => {
         return (
             <div>
-
                 <div class="flex py-1 pr-2 cursor-pointer">
                     <div className="my-4">
-                        <img src="https://picsum.photos/150/150" alt="Dog" />
+                        <img src="https://picsum.photos/150/150" alt="course image" />
                     </div>
                     <div class="max-w-xs bg-white overflow-hidden ml-3">
                         <div className="my-3">
