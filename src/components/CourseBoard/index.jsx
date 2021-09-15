@@ -536,6 +536,7 @@ const CourseBoard = () => {
   }
 
   // isSmallSize={isCourseSmallSize}
+  //
   const renderCourseList = useCallback(
     (isCourseSmallSize) => {
       return courseList.map((item, index) => {
