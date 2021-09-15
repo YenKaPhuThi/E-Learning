@@ -51,22 +51,28 @@ const CourseBoard = () => {
   let [activeSubject, setActiveSubject] = useState("Python");
 
   // SET UP LOGIC BUTTON CHỌN KHÓA HỌC--------------------
-  const slideNextCourse = (course) => {
-    if (course === "selectCourse") {
-      selectedSlideRef.current.slickNext();
-    } else {
-      allSlideRef.current.slickNext();
-    }
+  const slideNextCourse = useCallback(
+    (course) => {
+      // console.log("slideNextCourse");
+      if (course === "selectCourse") {
+        selectedSlideRef.current.slickNext();
+      } else {
+        allSlideRef.current.slickNext();
+      }
 
-  }
-
-  const slidePrevCourse = (course) => {
-    if (course === "selectCourse") {
-      selectedSlideRef.current.slickPrev();
-    } else {
-      allSlideRef.current.slickPrev();
     }
-  }
+  )
+
+  const slidePrevCourse = useCallback(
+    (course) => {
+      // console.log("slidePrevCourse");
+      if (course === "selectCourse") {
+        selectedSlideRef.current.slickPrev();
+      } else {
+        allSlideRef.current.slickPrev();
+      }
+    }
+  )
   //--------------------***--------------------
 
 
@@ -74,8 +80,6 @@ const CourseBoard = () => {
 
   // slider khóa học được chọn
   const selectedCourseSliderSetting = {
-    dots: false,
-    infinite: false,
     speed: 500,
     slidesToScroll: 1,
     slidesToShow: 4,
@@ -108,7 +112,7 @@ const CourseBoard = () => {
         settings: {
           slidesToShow: 5,
           slidesToScroll: 3,
-          infinite: true,
+
         }
       },
       {
@@ -116,7 +120,7 @@ const CourseBoard = () => {
         settings: {
           slidesToShow: 5,
           slidesToScroll: 3,
-          infinite: true,
+
         }
       },
     ],
@@ -127,7 +131,6 @@ const CourseBoard = () => {
     slidesToScroll: 1,
     slidesToShow: 1.2,
     initialSlide: 0,
-    infinite: false,
     responsive: [
       {
         breakpoint: 425,
@@ -177,7 +180,6 @@ const CourseBoard = () => {
   // slider môn học
   const subjectSliderSetting = {
     className: "slider variable-width",
-    infinite: true,
     slidesToShow: 5.5,
     slidesToScroll: 2,
     variableWidth: true,
@@ -258,21 +260,21 @@ const CourseBoard = () => {
   // HÀM RENDER CÁC COMPONENT NHỎ THÀNH PHẦN--------------------
 
   // render giới thiệu môn học, slider các khóa học
-  const renderSubjectSliderContent = (activeSubject, sliderSetting) => {
-    return (
-      <div>
-        <>
-          {(width >= breakpoint768) ? renderSubjecIntro(activeSubject) : <></>}
-        </>
-
-        <Slider ref={selectedSlideRef} {...sliderSetting}>
-          {renderCourseList()}
-
-        </Slider>
-
-      </div>
-    );
-  }
+  const renderSubjectSliderContent = useCallback(
+    (activeSubject, sliderSetting) => {
+      // console.log();
+      return (
+        <div>
+          <>
+            {(width >= breakpoint768) ? renderSubjecIntro(activeSubject) : <></>}
+          </>
+          <Slider ref={selectedSlideRef} {...sliderSetting}>
+            {renderCourseList()}
+          </Slider>
+        </div>
+      );
+    }, [activeSubject]
+  )
 
   // render UI môn học được chọn
   const renderEachSubjectContent = useCallback(
@@ -332,17 +334,7 @@ const CourseBoard = () => {
         isSubjectClicked ? (
           <div className="block">
             <Slider {...selectedCourseSliderSetting}>
-              <div>
-                <CourseItem></CourseItem>
-              </div>
-
-              <div>
-                <CourseItem></CourseItem>
-              </div>
-
-              <div>
-                <CourseItem></CourseItem>
-              </div>
+              {renderCourseList()}
             </Slider>
           </div>
         ) : (<></>)
@@ -358,7 +350,6 @@ const CourseBoard = () => {
         <div
           onClick={() => { handleActiveCourse("Python"); setInactiveSubject(); set_PythonSubject_Clicked(!is_PythonSubject_Clicked) }}
           className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}>Python</div>
-
         <div
           onClick={() => { handleActiveCourse("Excel"); setInactiveSubject(); set_ExcelSubject_Clicked(!is_ExcelSubject_Clicked) }}
           className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
@@ -439,13 +430,10 @@ const CourseBoard = () => {
             </div>
           )}
         </div>
-
-        <div className=" mt-5 p-7 border-2">
+        {/* <div className=" mt-5 p-7 border-2">
           {renderEachSubjectContent(activeSubject)}
-        </div>
-
+        </div> */}
       </div>
-
     )
   }
 
@@ -548,15 +536,17 @@ const CourseBoard = () => {
   }
 
   // isSmallSize={isCourseSmallSize}
-  const renderCourseList = (isCourseSmallSize) => {
-    return courseList.map((item, index) => {
-      return (
-        <div key={index}>
-          <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
-        </div >
-      );
-    })
-  }
+  const renderCourseList = useCallback(
+    (isCourseSmallSize) => {
+      return courseList.map((item, index) => {
+        return (
+          <div key={index}>
+            <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
+          </div >
+        );
+      })
+    }, [activeSubject]
+  );
 
   // render slider các khóa học ngẫu nhiên
   const renderAllCourse = (isCourseSmallSize) => {
@@ -578,6 +568,7 @@ const CourseBoard = () => {
       </div>
     )
   }
+
 
   //--------------------***--------------------
 
@@ -678,6 +669,9 @@ const CourseBoard = () => {
         </div>
         <div className="mt-5">
           {renderSubjectList(subjectSliderSetting)}
+        </div>
+        <div className=" mt-5 p-7 border-2">
+          {renderEachSubjectContent(activeSubject)}
         </div>
         <div>
           {renderAllCourse()}
