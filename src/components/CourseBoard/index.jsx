@@ -545,7 +545,7 @@ const CourseBoard = () => {
           </div >
         );
       })
-    }, [activeSubject]
+    }
   );
 
   // render slider các khóa học ngẫu nhiên
@@ -568,8 +568,6 @@ const CourseBoard = () => {
       </div>
     )
   }
-
-
   //--------------------***--------------------
 
 
