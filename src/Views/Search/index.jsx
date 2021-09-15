@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 // HOC
@@ -14,17 +14,18 @@ export default function Search() {
     return state.course.courseSearched;
   });
 
-  const totalResult = courseSearched?.length;
+  const totalResult = courseSearched.length;
 
   const renderCourseSearched = () => {
     return courseSearched.map((item, index) => {
-      const { tenKhoaHoc, moTa, hinhAnh, luotXem, ngayTao, soLuongHocVien } = item;
+      const { tenKhoaHoc, moTa, hinhAnh, luotXem, ngayTao, soLuongHocVien } =
+        item;
       const { hoTen, taiKhoan } = item.nguoiTao;
       return (
         <li key={index} className="card flex py-4">
           <div className="flex-shrink-0 mr-2 md:mr-4">
             <img
-              className="card-img-top w-16 h-16 object-cover md:w-64 h-36"
+              className="card-img-top w-16 h-16 object-cover md:w-64 md:h-36"
               src={hinhAnh}
               alt="Course Image"
             />
@@ -47,7 +48,9 @@ export default function Search() {
                 </div>
                 <p className="text-xs text-gray">(379,107)</p>
               </div>
-              <p className="text-xs text-gray mb-1">Số lượng học viên: {soLuongHocVien}</p>
+              <p className="text-xs text-gray mb-1">
+                Số lượng học viên: {soLuongHocVien}
+              </p>
             </div>
             <ul className="text-right">
               <li className="font-bold">{luotXem} views</li>
@@ -64,6 +67,20 @@ export default function Search() {
       <div className="py-8 px-6">
         <p className="font-bold text-gray text-right">{totalResult} results</p>
         <ul>{renderCourseSearched()}</ul>
+        {/* Implement case for no result found later, it's stucked with props in HOC */}
+        {/* <div>
+          <h2 className="text-2xl font-bold mb-8">
+            Sorry, we couldn't find any results
+          </h2>
+          <h3 className="text-xl font-bold mb-6">
+            Try adjusting your search. Here are some ideas:
+          </h3>
+          <ul className="list-disc list-inside">
+            <li className="mb-1">Make sure all words are spelled correctly</li>
+            <li className="mb-1">Try different search terms</li>
+            <li className="mb-1">Try more general search terms</li>
+          </ul>
+        </div> */}
       </div>
     </Layout>
   );

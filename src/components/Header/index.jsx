@@ -22,8 +22,8 @@ export default function Header(props) {
 
   const history = useHistory();
 
-  const goToSearch = () => {
-    return history.push("/search");
+  const goToPage = (page) => {
+    return history.push(page);
   };
 
   const accessToken = localStorage.getItem(TOKEN);
@@ -52,24 +52,26 @@ export default function Header(props) {
     setShowNavbarMenu(!showNavbarMenu);
   };
 
-  const handleShowHideSearchBox = () => {
-    setShowSearchBox(!showHideSearchBox);
-  };
+  const handleShowHideSearchBox = (params) => {
+    setShowSearchBox(params);
+  }
 
   const handleChange = (evt) => {
     setSearchValue(evt.target.value);
   };
 
   const handleSearchCourse = () => {
+    handleShowHideSearchBox(false);
+
     if (isEmpty(searchValue)) {
-      return;
+      return goToPage("/");
     }
 
     const dataRequest = {
       tenKhoaHoc: searchValue,
     };
 
-    dispatch(searchCourse(dataRequest.tenKhoaHoc, goToSearch));
+    dispatch(searchCourse(dataRequest.tenKhoaHoc, goToPage("/search")));
   };
 
   const renderCourseCategories = () => {
@@ -113,7 +115,7 @@ export default function Header(props) {
             <button
               className="p-3"
               onClick={() => {
-                handleShowHideSearchBox();
+                handleShowHideSearchBox(true);
               }}
             >
               <i className="fas fa-search"></i>
@@ -477,7 +479,7 @@ export default function Header(props) {
           <button
             className="p-3"
             onClick={() => {
-              handleShowHideSearchBox();
+              handleShowHideSearchBox(false);
             }}
           >
             <i className="fas fa-times fa-1x"></i>
