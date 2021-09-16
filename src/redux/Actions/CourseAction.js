@@ -55,12 +55,20 @@ export const searchCourse = (dataRequest, callBack) => {
     try {
       const result = await courseService.getCourseList(dataRequest);
 
-      dispatch(createAction(actionCourseTypes.SET_COURSE_SEARCHED, result.data));
+      return dispatch(
+        createAction(actionCourseTypes.SET_COURSE_SEARCHED, result.data)
+      );
 
       callBack();
     } catch (err) {
-      console.log(err);
-    }
-  }
-}
+      const showSearchNoResult = true;
 
+      dispatch(
+        createAction(
+          actionCourseTypes.SET_COURSE_SEARCHED_NO_RESULT,
+          showSearchNoResult
+        )
+      );
+    }
+  };
+};
