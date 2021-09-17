@@ -6,23 +6,30 @@ const CourseItem = (props) => {
     const title = "2021 Complete Python Bootcamp From Zero to Hero in Python";
     const isSmallSize = props.isSmallSize;
 
+    // Destructuring
+    const { hinhAnh, tenKhoaHoc } = props.data;
+    // console.log(index, hinhAnh, tenKhoaHoc)
+
+    // Optional Chaining
+    // const hinhAnh = props.data?.hinhAnh;
+    // const tenKhoaHoc = props.data?.tenKhoaHoc;
+    // console.log(tenKhoaHoc, hinhAnh,);
+
     // render item kích cỡ bình thường cho các màn hình còn lại
     const renderOtherScreen = () => {
-        const { name, img, index } = props;
-        // const course = props.courseData
-        // console.log("CourseItem", index, name, img);
         return (
             <div>
                 <div class="flex items-center py-50">
                     <div class="max-w-xs bg-white overflow-hidden cursor-pointer py-4 pr-4">
 
                         <div>
-                            <img src={img} alt="Dog" />
+                            {/* <img className="courseImg" alt="course image" /> */}
+                            <img src={hinhAnh} className="courseImg" alt="course image" />
                         </div>
 
                         <div className="my-3">
                             <p className="coureName">
-                                {name}
+                                {tenKhoaHoc}
                                 {/* {title.slice(0, 40)}... */}
                             </p>
 
@@ -46,7 +53,9 @@ const CourseItem = (props) => {
                             <p className="font-bold text-lg">$89.99</p>
                         </div>
 
-
+                        <div className="cartButton">
+                            <button><i class="fas fa-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,16 +65,18 @@ const CourseItem = (props) => {
     // render item nhỏ cho màn hình nhỏ
     const renderSmallPhoneScreen = () => {
         return (
-            <div>
-
+            <div className="smallCourseItem">
                 <div class="flex py-1 pr-2 cursor-pointer">
-                    <div className="my-4">
-                        <img src="https://picsum.photos/150/150" alt="Dog" />
+                    <div className="my-2">
+                        <img src={hinhAnh} className="smallCourseImg" alt="course image" />
+                        <div className="cartButton">
+                            <button><i class="fas fa-cart-plus"></i></button>
+                        </div>
                     </div>
                     <div class="max-w-xs bg-white overflow-hidden ml-3">
                         <div className="my-3">
                             <p className="coureName">
-                                {title.slice(0, 40)}...
+                                {tenKhoaHoc}
                             </p>
 
                             <p className="text-xs author">

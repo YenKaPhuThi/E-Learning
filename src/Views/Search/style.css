@@ -1,0 +1,7 @@
+.card {
+  border-top: 1px solid #d1d7dc;
+}
+
+.card:first-child {
+  border-top: none;
+}

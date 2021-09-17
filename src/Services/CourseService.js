@@ -1,3 +1,4 @@
+import { CODE_GROUP } from "../util/settings/config";
 import { baseService } from "./baseService";
 
 export class CourseService extends baseService {
@@ -5,8 +6,8 @@ export class CourseService extends baseService {
     super();
   }
 
-  getCourseList = () =>
-    this.get("api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01");
+  getCourseList = (dataRequest = "") =>
+    this.get(`api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${CODE_GROUP}&tenKhoaHoc=${dataRequest}`);
 
   getCourseCategories = () => this.get("api/QuanLyKhoaHoc/LayDanhMucKhoaHoc");
 
