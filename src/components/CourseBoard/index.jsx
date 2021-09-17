@@ -27,17 +27,6 @@ const CourseBoard = () => {
   // flag xác định kích thước item khóa học
   const isCourseSmallSize = true;
 
-  useEffect(() => {
-    const handleResizeWindow = () => setWidth(window.innerWidth);
-
-    // subscribe to window resize event "onComponentDidMount"
-    window.addEventListener("resize", handleResizeWindow);
-    return () => {
-      // unsubscribe "onComponentDestroy"
-      window.removeEventListener("resize", handleResizeWindow);
-    };
-  }, []);
-
   // Công tắc xác định trạng thái các môn học
   const [is_PythonSubject_Clicked, set_PythonSubject_Clicked] = useState(true);
   const [is_ExcelSubject_Clicked, set_ExcelSubject_Clicked] = useState(false);
@@ -49,6 +38,16 @@ const CourseBoard = () => {
 
   // môn học mặc định được chọn
   let [activeSubject, setActiveSubject] = useState("Python");
+
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    // subscribe to window resize event "onComponentDidMount"
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      // unsubscribe "onComponentDestroy"
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  }, []);
 
   // SET UP LOGIC BUTTON CHỌN KHÓA HỌC--------------------
   const slideNextCourse = useCallback(
@@ -248,84 +247,16 @@ const CourseBoard = () => {
     return (
       <div className="flex mr-4">
         <button className="px-7 text-3xl" onClick={() => slidePrevCourse(course)}>
-          <i class="fas fa-chevron-left"></i>
+          <i class="text-3xl fas fa-chevron-left"></i>
         </button>
         <button className="px-7 text-3xl" onClick={() => slideNextCourse(course)}>
-          <i class="fas fa-chevron-right"></i>
+          <i class="text-3xl fas fa-chevron-right"></i>
         </button>
       </div>
     )
   }
 
   // HÀM RENDER CÁC COMPONENT NHỎ THÀNH PHẦN--------------------
-
-  // render giới thiệu môn học, slider các khóa học
-  const renderSubjectSliderContent = useCallback(
-    (activeSubject, sliderSetting) => {
-      // console.log();
-      return (
-        <div>
-          <>
-            {(width >= breakpoint768) ? renderSubjecIntro(activeSubject) : <></>}
-          </>
-          <Slider ref={selectedSlideRef} {...sliderSetting}>
-            {renderCourseList()}
-          </Slider>
-        </div>
-      );
-    }, [activeSubject]
-  )
-
-  // render UI môn học được chọn
-  const renderEachSubjectContent = useCallback(
-    (activeSubject) => {
-      // console.log("renderEachSubjectContent", activeSubject);
-      switch (activeSubject) {
-        case "Python":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-        case "Excel":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-        case "WebDevelopment":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-        case "JavaScript":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-        case "DataScience":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-        case "AWSCertification":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-        case "Drawing":
-          return (
-            <div>
-              {renderSubjectSliderContent(activeSubject, selectedCourseSliderSetting)}
-            </div>
-          );
-      }
-    }, [activeSubject]
-  )
 
   // render dropdown slider các khóa học được chọn
   const renderDropdownCourse = (isSubjectClicked) => {
@@ -334,7 +265,7 @@ const CourseBoard = () => {
         isSubjectClicked ? (
           <div className="block">
             <Slider {...selectedCourseSliderSetting}>
-              {renderCourseList()}
+              {renderCourseByList(courseList)}
             </Slider>
           </div>
         ) : (<></>)
@@ -431,123 +362,155 @@ const CourseBoard = () => {
           )}
         </div>
         {/* <div className=" mt-5 p-7 border-2">
-          {renderEachSubjectContent(activeSubject)}
+          {renderIntroBySubject(activeSubject)(activeSubject)}
         </div> */}
       </div>
     )
   }
 
-  // render giới thiệu môn và button chọn khóa
-  const renderSubjecIntro = (subject) => {
+  // render giới thiệu theo môn học
+  const renderIntroBySubject = (subject) => {
     switch (subject) {
       case "Python":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Expand your career opportunities with Python</h3>
-              <p className="my-2">Whether you work in machine learning or finance, or are pursuing a career in web development or data science, Python is one of the most important skills you can learn. Python's simple syntax is especially suited for desktop, web, and business applications. Python's design philosophy emphasizes readability and usability.</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
-
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Expand your career opportunities with Python</h3>
+                  <p className="my-2">Whether you work in machine learning or finance, or are pursuing a career in web development or data science, Python is one of the most important skills you can learn. Python's simple syntax is especially suited for desktop, web, and business applications. Python's design philosophy emphasizes readability and usability.</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
           </div>
         );
       case "Excel":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Analyze and visualize data with Excel</h3>
-              <p className="my-2">Regardless of the industry you work in, Microsoft Office Excel is an invaluable spreadsheet program for organizing and representing data. Excel offers functions, formulas, and pivot tables to help you aggregate and then analyze large sets of information.</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Analyze and visualize data with Excel</h3>
+                  <p className="my-2">Regardless of the industry you work in, Microsoft Office Excel is an invaluable spreadsheet program for organizing and representing data. Excel offers functions, formulas, and pivot tables to help you aggregate and then analyze large sets of information.</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Excel</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
           </div>
         );
       case "WebDevelopment":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Build websites and applications with Web Development</h3>
-              <p className="my-2">The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on.</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Build websites and applications with Web Development</h3>
+                  <p className="my-2">The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on.</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Web Development</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
+
           </div>
         );
       case "JavaScript":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Grow your software development skills with JavaScript</h3>
-              <p className="my-2">JavaScript is one of the most ubiquitous programming languages on the planet, mostly because it's the backbone of interactive web applications. On top of that, JavaScript is a great language for beginners because it gives them a chance to write code that does something visual, which is exciting and helpful when you're just...</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Grow your software development skills with JavaScript</h3>
+                  <p className="my-2">JavaScript is one of the most ubiquitous programming languages on the planet, mostly because it's the backbone of interactive web applications. On top of that, JavaScript is a great language for beginners because it gives them a chance to write code that does something visual, which is exciting and helpful when you're just...</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore JavaScript</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
           </div>
         );
       case "DataScience":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Lead data-driven decisions with Data Science</h3>
-              <p className="my-2">Data science is everywhere. Better data science practices are allowing corporations to cut unnecessary costs, automate computing, and analyze markets. Essentially, data science is the key to getting ahead in a competitive global climate.</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Lead data-driven decisions with Data Science</h3>
+                  <p className="my-2">Data science is everywhere. Better data science practices are allowing corporations to cut unnecessary costs, automate computing, and analyze markets. Essentially, data science is the key to getting ahead in a competitive global climate.</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Data Science</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
           </div>
         );
       case "AWSCertification":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Become an expert in cloud computing with AWS Certification</h3>
-              <p className="my-2">Because Amazon Web Services is a constantly evolving cloud ecosystem, staying up with new AWS services and features can be a chore. That’s why earning an AWS certification is such a great IT career move. In the eyes of future employers, you are an AWS authority.</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Become an expert in cloud computing with AWS Certification</h3>
+                  <p className="my-2">Because Amazon Web Services is a constantly evolving cloud ecosystem, staying up with new AWS services and features can be a chore. That’s why earning an AWS certification is such a great IT career move. In the eyes of future employers, you are an AWS authority.</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore AWS Certification</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
           </div>
         );
       case "Drawing":
         return (
           <div>
-            <div>
-              <h3 className="font-bold text-2xl">Expand your creative skillset with Drawing</h3>
-              <p className="my-2">Besides being the foundation upon which most art forms are built, drawing is also an excellent way to relieve stress and feed your inner creativity. Drawing teaches us how to be observant, develop an attention to detail, and express ourselves.</p>
-            </div>
-            <div className="flex justify-between">
-              <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-            </div>
+            {(width >= breakpoint768) ?
+              <>
+                <div>
+                  <h3 className="font-bold text-2xl">Expand your creative skillset with Drawing</h3>
+                  <p className="my-2">Besides being the foundation upon which most art forms are built, drawing is also an excellent way to relieve stress and feed your inner creativity. Drawing teaches us how to be observant, develop an attention to detail, and express ourselves.</p>
+                </div>
+                <div className="flex justify-between">
+                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Drawing</button>
+                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+                </div>
+              </>
+              : <></>
+            }
           </div>
         );
     }
   }
 
-  // isSmallSize={isCourseSmallSize}
-  //
-  const renderCourseList = useCallback(
-    (isCourseSmallSize) => {
-      return courseList.map((item, index) => {
-        return (
-          <div key={index}>
-            <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
-          </div >
-        );
-      })
-    }
-  );
+  // render khóa học theo danh sách truyền vào
+  const renderCourseByList = (list, isCourseSmallSize) => {
+    return list.map((item, index) => {
+      return (
+        <div key={index}>
+          <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
+        </div >
+      );
+    })
+  }
 
   // render slider các khóa học ngẫu nhiên
   const renderAllCourse = (isCourseSmallSize) => {
@@ -562,10 +525,9 @@ const CourseBoard = () => {
 
         <div>
           <Slider ref={allSlideRef} {...allCourseSliderSetting}>
-            {renderCourseList(isCourseSmallSize)}
+            {renderCourseByList(courseList, isCourseSmallSize)}
           </Slider>
         </div>
-
       </div>
     )
   }
@@ -621,7 +583,7 @@ const CourseBoard = () => {
           {renderDropdownCourse(is_DrawingSubject_Clicked)}
         </div>
         <div>
-          {renderAllCourse(isCourseSmallSize)}
+          {renderAllCourse(courseList, isCourseSmallSize)}
         </div>
       </div>
 
@@ -633,7 +595,6 @@ const CourseBoard = () => {
       <div>
         <div>
           {renderSubjectList(subjectSliderSetting)}
-
         </div>
         <div>
           {renderAllCourse()}
@@ -651,6 +612,12 @@ const CourseBoard = () => {
         </div>
         <div className="mt-5">
           {renderSubjectList(subjectSliderSetting)}
+        </div>
+        <div className=" mt-5 p-7 border-2">
+          {renderIntroBySubject(activeSubject)}
+          {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
+            {renderCourseByList(courseList)}
+          </Slider>}
         </div>
         <div>
           {renderAllCourse()}
@@ -670,7 +637,10 @@ const CourseBoard = () => {
           {renderSubjectList(subjectSliderSetting)}
         </div>
         <div className=" mt-5 p-7 border-2">
-          {renderEachSubjectContent(activeSubject)}
+          {renderIntroBySubject(activeSubject)}
+          {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
+            {renderCourseByList(courseList)}
+          </Slider>}
         </div>
         <div>
           {renderAllCourse()}
@@ -680,9 +650,8 @@ const CourseBoard = () => {
   }
   //--------------------***--------------------
 
-  // "px-6"
   return (
-    <div className={`${width > breakpoint1400 ? 'px-48' : 'px-6'}`}>
+    <div className={`${width > breakpoint1400 ? 'px-48' : 'px-6 mt-10'}`}>
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :

@@ -53,7 +53,9 @@ const CourseItem = (props) => {
                             <p className="font-bold text-lg">$89.99</p>
                         </div>
 
-
+                        <div className="cartButton">
+                            <button><i class="fas fa-cart-plus"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,15 +65,18 @@ const CourseItem = (props) => {
     // render item nhỏ cho màn hình nhỏ
     const renderSmallPhoneScreen = () => {
         return (
-            <div>
+            <div className="smallCourseItem">
                 <div class="flex py-1 pr-2 cursor-pointer">
-                    <div className="my-4">
-                        <img src="https://picsum.photos/150/150" alt="course image" />
+                    <div className="my-2">
+                        <img src={hinhAnh} className="smallCourseImg" alt="course image" />
+                        <div className="cartButton">
+                            <button><i class="fas fa-cart-plus"></i></button>
+                        </div>
                     </div>
                     <div class="max-w-xs bg-white overflow-hidden ml-3">
                         <div className="my-3">
                             <p className="coureName">
-                                {title.slice(0, 40)}...
+                                {tenKhoaHoc}
                             </p>
 
                             <p className="text-xs author">
