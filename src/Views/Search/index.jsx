@@ -14,6 +14,10 @@ export default function Search() {
     return state.course.courseSearched;
   });
 
+  const isShowSearchNoResult = useSelector((state) => {
+    return state.course.isShowSearchNoResult;
+  });
+
   const totalResult = courseSearched.length;
 
   const renderCourseSearched = () => {
@@ -65,22 +69,30 @@ export default function Search() {
   return (
     <Layout>
       <div className="py-8 px-6">
-        <p className="font-bold text-gray text-right">{totalResult} results</p>
-        <ul>{renderCourseSearched()}</ul>
-        {/* Implement case for no result found later, it's stucked with props in HOC */}
-        {/* <div>
-          <h2 className="text-2xl font-bold mb-8">
-            Sorry, we couldn't find any results
-          </h2>
-          <h3 className="text-xl font-bold mb-6">
-            Try adjusting your search. Here are some ideas:
-          </h3>
-          <ul className="list-disc list-inside">
-            <li className="mb-1">Make sure all words are spelled correctly</li>
-            <li className="mb-1">Try different search terms</li>
-            <li className="mb-1">Try more general search terms</li>
-          </ul>
-        </div> */}
+        {isShowSearchNoResult ? (
+          <div>
+            <h2 className="text-2xl font-bold mb-8">
+              Sorry, we couldn't find any results
+            </h2>
+            <h3 className="text-xl font-bold mb-6">
+              Try adjusting your search. Here are some ideas:
+            </h3>
+            <ul className="list-disc list-inside">
+              <li className="mb-1">
+                Make sure all words are spelled correctly
+              </li>
+              <li className="mb-1">Try different search terms</li>
+              <li className="mb-1">Try more general search terms</li>
+            </ul>
+          </div>
+        ) : (
+          <>
+            <p className="font-bold text-gray text-right">
+              {totalResult} results
+            </p>
+            <ul>{renderCourseSearched()}</ul>
+          </>
+        )}
       </div>
     </Layout>
   );
