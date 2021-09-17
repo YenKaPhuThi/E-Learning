@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "../../HOC/Layout";
+import { fetchCourseList } from "../../Redux/Actions/CourseAction";
 
-import { LIST_COURSES } from "../../Redux/Actions/Types/CourseType";
-import { INFO_USER } from "../../Redux/Actions/Types/UserType";
+import { getInforUserAction } from "../../Redux/Actions/UserAction";
 
 export default function MyLearning() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchCourseList());
-  //   dispatch(getInforUserAction());
-  // }, [dispatch]);
-  const courseList = JSON.parse(localStorage.getItem(LIST_COURSES));
-  const user = JSON.parse(localStorage.getItem(INFO_USER));
-  const { chiTietKhoaHocGhiDanh } = user;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCourseList());
+    dispatch(getInforUserAction());
+  }, [dispatch]);
+  const { userLogin } = useSelector((state) => state.user);
+  const { courseList } = useSelector((state) => state.course);
+
+  const { chiTietKhoaHocGhiDanh } = userLogin;
 
   const listCourses = [].concat(
     chiTietKhoaHocGhiDanh?.map((detail) => {
