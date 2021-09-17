@@ -21,6 +21,7 @@ import CourseBoard from "../../Components/CourseBoard";
 // Util
 import { USER_LOGIN, CODE_GROUP } from "../../util/settings/config";
 import { getInforUserAction } from "../../Redux/Actions/UserAction";
+import Loading from "../../Components/Loading";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ export default function Home() {
 
   return (
     <>
+      <Loading />
       <Header />
       <Banner />
       <CourseBoard></CourseBoard>

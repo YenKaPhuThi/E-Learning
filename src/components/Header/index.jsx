@@ -36,6 +36,14 @@ export default function Header(props) {
   const [showNavbarMenu, setShowNavbarMenu] = useState(true);
   const [showHideSearchBox, setShowSearchBox] = useState(false);
 
+  const changeToText = (ma) => {
+    if (ma === "GV") {
+      return "Giảng viên";
+    } else {
+      return "Học viên";
+    }
+  };
+
   const courseCategories = useSelector((state) => {
     return state.course.courseCategories;
   });
@@ -54,7 +62,7 @@ export default function Header(props) {
 
   const handleShowHideSearchBox = (params) => {
     setShowSearchBox(params);
-  }
+  };
 
   const handleChange = (evt) => {
     setSearchValue(evt.target.value);
@@ -201,17 +209,17 @@ export default function Header(props) {
                     <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
                       <img
                         src="https://source.unsplash.com/100x100/?portrait"
-                        alt="Avatar image"
-                        className="object-cover object-center w-full h-full rounded"
+                        alt
+                        className="object-cover object-center w-full h-full rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
                       />
                     </div>
                     <div className="flex flex-col space-y-4">
                       <div>
-                        <h2 className="text-2xl font-semibold">
+                        <h2 className="text-xl font-semibold">
                           {userLogin.hoTen}
                         </h2>
-                        <span className="text-sm text-coolGray-600">
-                          {userLogin.maLoaiNguoiDung}
+                        <span className="text-xs text-coolGray-600">
+                          {changeToText(userLogin.maLoaiNguoiDung)}
                         </span>
                       </div>
                       <div className="space-y-1">
@@ -227,7 +235,7 @@ export default function Header(props) {
                               d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"
                             />
                           </svg>
-                          <span className="text-coolGray-600">
+                          <span className="text-coolGray-600 text-xs">
                             {userLogin.email}
                           </span>
                         </span>
@@ -243,7 +251,7 @@ export default function Header(props) {
                               d="M449.366,89.648l-.685-.428L362.088,46.559,268.625,171.176l43,57.337a88.529,88.529,0,0,1-83.115,83.114l-57.336-43L46.558,362.088l42.306,85.869.356.725.429.684a25.085,25.085,0,0,0,21.393,11.857h22.344A327.836,327.836,0,0,0,461.222,133.386V111.041A25.084,25.084,0,0,0,449.366,89.648Zm-20.144,43.738c0,163.125-132.712,295.837-295.836,295.837h-18.08L87,371.76l84.18-63.135,46.867,35.149h5.333a120.535,120.535,0,0,0,120.4-120.4v-5.333l-35.149-46.866L371.759,87l57.463,28.311Z"
                             />
                           </svg>
-                          <span className="text-coolGray-600">
+                          <span className="text-coolGray-600 text-xs">
                             {userLogin?.soDT}
                           </span>
                         </span>
@@ -314,141 +322,141 @@ export default function Header(props) {
           <i className="fas fa-times fa-1x"></i>
         </button>
         <div className="navbar-backdrop fixed inset-0 bg-black opacity-50" />
-        <div
-          className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 max-w-sm bg-white border-r overflow-y-auto"
-          style={{ maxWidth: "45%" }}
-        >
-          <ul className=" border-b border-gray-300 p-4 bg-gray-100">
-            {accessToken ? (
-              <li className="bg-gray-100 ">
-                <div className="flex items-center justify-items-center">
-                  <img
-                    className="w-10 h-10 rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
-                    src="https://source.unsplash.com/100x100/?portrait"
-                  ></img>
-                  <div className="flex ">
-                    <div className="pl-5">
-                      <span className="btn-outline font-bold  ">
-                        Hi {userLogin?.hoTen}
-                      </span>
-                      <br></br>
-                      <span>welcome to comeback </span>
-                    </div>
-                    <div
-                      className="ml-2"
-                      onClick={() => {
-                        handleNavbarMenu();
-                      }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+        <div className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 max-w-sm bg-white border-r overflow-y-auto">
+          <div>
+            <ul className=" border-b border-gray-300 p-4 bg-gray-100">
+              {accessToken ? (
+                <li className="bg-gray-100 ">
+                  <div className="flex items-center justify-items-center">
+                    <img
+                      className="w-10 h-10 rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
+                      src="https://source.unsplash.com/100x100/?portrait"
+                    ></img>
+                    <div className="flex ">
+                      <div className="pl-5">
+                        <span className="btn-outline font-bold  ">
+                          Hi {userLogin?.hoTen}
+                        </span>
+                        <br></br>
+                        <span>welcome to comeback </span>
+                      </div>
+                      <div
+                        className="ml-2"
+                        onClick={() => {
+                          handleNavbarMenu();
+                        }}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            ) : (
-              <>
-                {" "}
-                <li>
-                  <NavLink
-                    to="/login"
-                    className="flex items-center justify-between px-4 py-2 text-primary"
-                  >
-                    Log in
-                  </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/signup"
-                    className="flex items-center justify-between px-4 py-2 text-primary"
-                  >
-                    Sign up
-                  </NavLink>
-                </li>
-              </>
-            )}
-          </ul>
-          <div>
-            <h5 className="font-bold text-gray text-sm px-3 pt-4">
-              Most popular
-            </h5>
-            <ul>{renderCourseCategories()}</ul>
-          </div>
-        </div>
-        <div
-          className={`  fixed top-0 left-0 bottom-0 flex flex-col md:min-w-72 max-w-sm   border-r overflow-y-auto
-          ${showNavbarMenu ? "hidden" : ""}`}
-          style={{ maxWidth: "45%" }}
-        >
-          <div className=" border-b  border-gray-300 p-4 bg-gray-100 ">
-            <div
-              className=" flex "
-              onClick={() => {
-                handleNavbarMenu();
-              }}
-            >
-              <span className="mx-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </span>{" "}
-              Menu
+              ) : (
+                <>
+                  {" "}
+                  <li>
+                    <NavLink
+                      to="/login"
+                      className="flex items-center justify-between px-4 py-2 text-primary"
+                    >
+                      Log in
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/signup"
+                      className="flex items-center justify-between px-4 py-2 text-primary"
+                    >
+                      Sign up
+                    </NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+            <div>
+              <h5 className="font-bold text-gray text-sm px-3 pt-4">
+                Most popular
+              </h5>
+              <ul>{renderCourseCategories()}</ul>
             </div>
           </div>
-          <ul className=" border-b h-full bg-white border-gray-300 p-4">
-            <li className="hover:text-purple-400">
-              <NavLink
-                to="/mylearning"
-                className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
-              >
-                My learning
-              </NavLink>
-            </li>
-            <li className="hover:text-purple-400">
-              <NavLink
-                to="/chinhsuathongtin"
-                className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
-              >
-                Change profile
-              </NavLink>
-            </li>
 
-            <hr />
-            <li className="hover:text-purple-400">
-              <NavLink
-                to="/"
+          <div
+            className={`  absolute h-full w-full ${
+              showNavbarMenu ? "hidden" : ""
+            }`}
+          >
+            <div className=" border-b  border-gray-300 p-4 bg-gray-100 ">
+              <div
+                className=" flex "
                 onClick={() => {
-                  localStorage.removeItem(TOKEN);
+                  handleNavbarMenu();
                 }}
-                className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
               >
-                Sign out
-              </NavLink>
-            </li>
-          </ul>
+                <span className="mx-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </span>{" "}
+                Menu
+              </div>
+            </div>
+            <ul className=" border-b h-full bg-white border-gray-300 p-4">
+              <li className="hover:text-purple-400">
+                <NavLink
+                  to="/mylearning"
+                  className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
+                >
+                  My learning
+                </NavLink>
+              </li>
+              <li className="hover:text-purple-400">
+                <NavLink
+                  to="/chinhsuathongtin"
+                  className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
+                >
+                  Change profile
+                </NavLink>
+              </li>
+
+              <hr />
+              <li className="hover:text-purple-400">
+                <NavLink
+                  to="/"
+                  onClick={() => {
+                    localStorage.removeItem(TOKEN);
+                  }}
+                  className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
+                >
+                  Sign out
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
 
