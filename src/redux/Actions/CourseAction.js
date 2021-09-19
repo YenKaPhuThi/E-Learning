@@ -58,6 +58,7 @@ export const reverseCourse = (dataRequest) => {
 export const searchCourse = (dataRequest, callBack) => {
     return async(dispatch) => {
         try {
+            dispatch(displayLoadingAction);
             const result = await courseService.getCourseList(dataRequest);
 
             return dispatch(
@@ -65,6 +66,9 @@ export const searchCourse = (dataRequest, callBack) => {
             );
 
             callBack();
+
+            dispatch(hideLoadingAction);
+
         } catch (err) {
             const showSearchNoResult = true;
 

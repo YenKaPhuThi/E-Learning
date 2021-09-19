@@ -130,7 +130,7 @@ export default function Header(props) {
             </button>
             <button className="relative p-3">
               <i class="fas fa-cart-plus"></i>
-              <span class="absolute -right-1 top-0 text-xs bg-primary text-white font-bold py-1 px-2 rounded-full">
+              <span class="absolute flex align-middle justify-center w-6 h-6 -right-1 top-0 text-xs bg-primary text-white font-bold py-1 px-2 rounded-full">
                 {chiTietKhoaHocGhiDanh?.length}
               </span>
             </button>
@@ -139,7 +139,7 @@ export default function Header(props) {
         <ul className="hidden md:flex md:flex-1 md:items-center md:space-x-2">
           <li className="relative">
             <button className="p-3 text-sm hover-text-primary hover-btn">
-              Categories
+              Danh Mục
             </button>
             <div className="absolute left-0 z-10 menu-popover">
               <div className="box-shadow">
@@ -161,7 +161,7 @@ export default function Header(props) {
               </button>
               <input
                 className="flex-1 bg-transparent rounded-r-3xl text-sm outline-none pl-1 pr-4"
-                placeholder="Search for anything"
+                placeholder="Tìm kiếm bất cứ thứ gì"
                 type="text"
                 name="searchInput"
                 value={searchValue}
@@ -176,7 +176,7 @@ export default function Header(props) {
           </li>
           <li>
             <a href="#" className="p-3 text-sm hover-text-primary">
-              Teach on Udemy
+              Dạy trên Udemy
             </a>
           </li>
           <li>
@@ -185,7 +185,7 @@ export default function Header(props) {
               className="relative p-3 text-sm hover-text-primary"
             >
               <i className="fas fa-cart-plus"></i>
-              <span class="absolute -right-1 top-0 text-xs bg-primary text-white font-bold py-1 px-2 rounded-full">
+              <span class="absolute flex align-middle justify-center w-6 h-6 -right-1 top-0 text-xs bg-primary text-white font-bold py-1 px-2 rounded-full">
                 {chiTietKhoaHocGhiDanh?.length}
               </span>
             </NavLink>
@@ -322,7 +322,7 @@ export default function Header(props) {
           <i className="fas fa-times fa-1x"></i>
         </button>
         <div className="navbar-backdrop fixed inset-0 bg-black opacity-50" />
-        <div className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 max-w-sm bg-white border-r overflow-y-auto">
+        <div className="fixed top-0 left-0 bottom-0 flex flex-col md:w-72 w-sm bg-white border-r overflow-y-auto">
           <div>
             <ul className=" border-b border-gray-300 p-4 bg-gray-100">
               {accessToken ? (
@@ -388,7 +388,7 @@ export default function Header(props) {
             </ul>
             <div>
               <h5 className="font-bold text-gray text-sm px-3 pt-4">
-                Most popular
+                Phổ biến nhất
               </h5>
               <ul>{renderCourseCategories()}</ul>
             </div>
@@ -478,7 +478,7 @@ export default function Header(props) {
           </button>
           <input
             className="flex-1 bg-transparent text-sm outline-none px-1"
-            placeholder="Search for anything"
+            placeholder="Tìm kiếm bất cứ thứ gì"
             type="text"
             name="searchInput"
             value={searchValue}
