@@ -311,10 +311,11 @@ const CourseBoard = () => {
   const renderSubjectListItem = useCallback(
     (activeSubject) => {
       const list = [...courseCategoriList];
-      return list.map((item) => {
+      return list.map((item, index) => {
         const { maDanhMuc, tenDanhMuc } = item;
         return (
           <div
+            key={index}
             onClick={
               () => {
                 setActiveSubject(maDanhMuc);
@@ -350,11 +351,11 @@ const CourseBoard = () => {
   // render giới thiệu theo môn học
   const renderIntroBySubject = (subject) => {
     const list = [...courseCategoriList];
-    return list.map((item) => {
+    return list.map((item, index) => {
       if (item.maDanhMuc === subject) {
         const { tenDanhMuc, gioiThieu } = item;
         return (
-          <>
+          <React.Fragment key={index}>
             <div>
               <h3 className="font-bold text-2xl">{tenDanhMuc}</h3>
               <p className="subjectIntro">{gioiThieu}</p>
@@ -362,7 +363,7 @@ const CourseBoard = () => {
             <div className="flex justify-end">
               {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
             </div>
-          </>
+          </React.Fragment>
         )
       }
     })
@@ -408,10 +409,10 @@ const CourseBoard = () => {
       return (
         <div>
           {
-            list.map((item) => {
+            list.map((item, index) => {
               const { maDanhMuc, tenDanhMuc } = item;
               return (
-                <>
+                <React.Fragment key={index}>
                   <div onClick={() => {
                     setActiveSubject(maDanhMuc);
                     handleClickedSubject(maDanhMuc);
@@ -420,7 +421,7 @@ const CourseBoard = () => {
                     <i class="fas fa-chevron-down"></i>
                   </div>
                   {renderDropdownCourse(activeSubject, maDanhMuc)}
-                </>
+                </React.Fragment>
               )
             })
           }

@@ -11,13 +11,9 @@ export class CourseService extends baseService {
 
   getCourseCategories = () => this.get("api/QuanLyKhoaHoc/LayDanhMucKhoaHoc");
 
-  registerCourse = (dataRequest) => {
-    this.post("api/QuanLyKhoaHoc/DangKyKhoaHoc", dataRequest);
-  };
+  registerCourse = (dataRequest) => this.post("api/QuanLyKhoaHoc/DangKyKhoaHoc", dataRequest);
 
-  reverseCourse = (dataRequest) => {
-    this.post("api/QuanLyKhoaHoc/HuyGhiDanh", dataRequest);
-  };
+  reverseCourse = (dataRequest) => this.post("api/QuanLyKhoaHoc/HuyGhiDanh", dataRequest);
 }
 
 export const courseService = new CourseService();

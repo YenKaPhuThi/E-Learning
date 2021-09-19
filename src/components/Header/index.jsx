@@ -48,12 +48,8 @@ export default function Header(props) {
     return state.course.courseCategories;
   });
 
-  const handleShowNavbar = () => {
+  const handleShowCloseNavbar = () => {
     setShowNavbar(true);
-  };
-
-  const handleCloseNavbar = () => {
-    setShowNavbar(false);
   };
 
   const handleNavbarMenu = () => {
@@ -101,7 +97,7 @@ export default function Header(props) {
           <button
             className="p-3 md:hidden"
             onClick={() => {
-              handleShowNavbar();
+              handleShowCloseNavbar(true);
             }}
           >
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
@@ -319,7 +315,7 @@ export default function Header(props) {
         <button
           className="absolute left-72 -top-14 bg-white w-12 h-12 m-4 z-10 rounded-full"
           onClick={() => {
-            handleCloseNavbar();
+            handleShowCloseNavbar(false);
           }}
         >
           <i className="fas fa-times fa-1x"></i>
