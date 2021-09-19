@@ -9,7 +9,9 @@ export const fetchCourseList = () => {
         try {
             dispatch(displayLoadingAction);
             const result = await courseService.getCourseList();
-            dispatch(createAction(actionCourseTypes.SET_COURSE_LIST, result.data));
+            await dispatch(
+                createAction(actionCourseTypes.SET_COURSE_LIST, result.data)
+            );
             dispatch(hideLoadingAction);
         } catch (err) {
             console.log(err);

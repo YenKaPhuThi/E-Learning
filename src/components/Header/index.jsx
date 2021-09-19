@@ -203,17 +203,20 @@ export default function Header(props) {
                 </span>
               </div>
 
-              <ul className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1">
+              <ul
+                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border"
+                style={{ border: "1px !important" }}
+              >
                 <li>
-                  <div className="max-w-md p-8 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block">
-                    <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
+                  <div className="max-w-md p-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block">
+                    <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-14 sm:w-14 mt-4 sm:mb-0">
                       <img
                         src="https://source.unsplash.com/100x100/?portrait"
                         alt
                         className="object-cover object-center w-full h-full rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
                       />
                     </div>
-                    <div className="flex flex-col space-y-4">
+                    <div className="flex flex-col space-y-1">
                       <div>
                         <h2 className="text-xl font-semibold">
                           {userLogin.hoTen}
@@ -263,17 +266,17 @@ export default function Header(props) {
                 <li className="hover:text-purple-400">
                   <NavLink
                     to="/mylearning"
-                    className="max-w-md py-2 px-8 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
+                    className="max-w-md py-2 px-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
-                    My learning
+                    Khóa học đã đăng ký
                   </NavLink>
                 </li>
                 <li className="hover:text-purple-400">
                   <NavLink
                     to="/chinhsuathongtin"
-                    className="max-w-md py-2 px-8 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
+                    className="max-w-md py-2 px-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
-                    Change profile
+                    Thay đổi thông tin
                   </NavLink>
                 </li>
 
@@ -284,9 +287,9 @@ export default function Header(props) {
                     onClick={() => {
                       localStorage.removeItem(TOKEN);
                     }}
-                    className="max-w-md py-2 px-8 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
+                    className="max-w-md py-2 px-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
-                    Sign out
+                    Đăng xuất
                   </NavLink>
                 </li>
               </ul>
@@ -295,12 +298,12 @@ export default function Header(props) {
             <>
               <li>
                 <NavLink to="/signin" className="btn-outline font-bold">
-                  Log in
+                  Đăng nhập
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/signup" className="btn-dark font-bold">
-                  Sign up
+                  Đăng ký
                 </NavLink>
               </li>
             </>
@@ -335,10 +338,10 @@ export default function Header(props) {
                     <div className="flex ">
                       <div className="pl-5">
                         <span className="btn-outline font-bold  ">
-                          Hi {userLogin?.hoTen}
+                          Chào {userLogin?.hoTen}
                         </span>
                         <br></br>
-                        <span>welcome to comeback </span>
+                        <span>Chào mừng bạn </span>
                       </div>
                       <div
                         className="ml-2"
@@ -372,7 +375,7 @@ export default function Header(props) {
                       to="/login"
                       className="flex items-center justify-between px-4 py-2 text-primary"
                     >
-                      Log in
+                      Đăng nhập
                     </NavLink>
                   </li>
                   <li>
@@ -380,7 +383,7 @@ export default function Header(props) {
                       to="/signup"
                       className="flex items-center justify-between px-4 py-2 text-primary"
                     >
-                      Sign up
+                      Đăng ký
                     </NavLink>
                   </li>
                 </>
@@ -431,7 +434,7 @@ export default function Header(props) {
                   to="/mylearning"
                   className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
                 >
-                  My learning
+                  Khóa học đã đăng ký
                 </NavLink>
               </li>
               <li className="hover:text-purple-400">
@@ -439,7 +442,7 @@ export default function Header(props) {
                   to="/chinhsuathongtin"
                   className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
                 >
-                  Change profile
+                  Thay đổi thông tin
                 </NavLink>
               </li>
 
@@ -452,7 +455,7 @@ export default function Header(props) {
                   }}
                   className="max-w-md py-2 px-8 sm:flex sm:space-x-6 text-coolGray-800 block"
                 >
-                  Sign out
+                  Đăng xuất
                 </NavLink>
               </li>
             </ul>
