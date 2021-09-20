@@ -1,13 +1,13 @@
-.voteIcon {
+/* .voteIcon {
   color: #e59819;
-  font-size: 9px;
+  font-size: 7px;
   padding: 0 2px 0 2px;
 }
 
 .voteIconGroup {
-  line-height: 17px;
+  line-height: 10px;
   margin: 0 4px 0 4px;
-}
+} */
 
 .voteScore {
   color: #b4690e;
@@ -15,17 +15,19 @@
 
 .author {
   color: #6a6f73;
-  padding-top: 6px;
+  padding-top: 1px;
 }
 .voteQuantity {
   color: #6a6f73;
+  line-height: 22px;
+  font-size: 12px;
 }
 
 .coureName {
   line-height: 1.2;
-  height: 50px;
+  height: 45px;
   letter-spacing: -0.02rem;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -35,8 +37,8 @@
 }
 
 .smallCourseImg {
-  max-height: 80px;
-  max-width: 80px;
+  height: 85px;
+  width: 350px;
 }
 
 .smallCourseItem {

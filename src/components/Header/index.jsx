@@ -453,9 +453,8 @@ export default function Header(props) {
       </nav>
 
       <div
-        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${
-          showHideSearchBox ? "" : "hidden"
-        }`}
+        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${showHideSearchBox ? "" : "hidden"
+          }`}
       >
         <form
           action="/"

@@ -8,6 +8,8 @@ import "./styles.css";
 
 const CourseBoard = () => {
 
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJGcm9udCBFbmQgNjQiLCJIZXRIYW5TdHJpbmciOiIyMS8wMS8yMDIyIiwiSGV0SGFuVGltZSI6IjE2NDI3MjMyMDAwMDAiLCJuYmYiOjE2MTYxNzMyMDAsImV4cCI6MTY0Mjg3MDgwMH0.2sSWVGy-3Ce9iJ8bIYmYOJ9aE1eu3fz07DtA2ECfiyk
+
   // các kích thước srceen để chỉnh responsive,
   // định nghĩa width độ lớn màn hình sau khi reload
   const [width, setWidth] = useState(window.innerWidth);
@@ -20,6 +22,10 @@ const CourseBoard = () => {
     return state.course.courseList;
   });
 
+  const courseCategoriList = useSelector((state) => {
+    return state.course.courseCategories;
+  });
+
   // dùng xác định slider nào dùng button nào
   const selectedSlideRef = useRef();
   const allSlideRef = useRef();
@@ -28,16 +34,49 @@ const CourseBoard = () => {
   const isCourseSmallSize = true;
 
   // Công tắc xác định trạng thái các môn học
-  const [is_PythonSubject_Clicked, set_PythonSubject_Clicked] = useState(true);
-  const [is_ExcelSubject_Clicked, set_ExcelSubject_Clicked] = useState(false);
-  const [is_WebDevSubject_Clicked, set_WebDevSubject_Clicked] = useState(false);
-  const [is_JavaScriptSubject_Clicked, set_JavaScriptSubject_Clicked] = useState(false);
-  const [is_DataScienceSubject_Clicked, set_DataScienceSubject_Clicked] = useState(false);
-  const [is_AWSSubject_Clicked, set_AWSSubject_Clicked] = useState(false);
-  const [is_DrawingSubject_Clicked, set_DrawingSubject_Clicked] = useState(false);
+  const [is_BackEndSubject_Clicked, set_BackEndSubject_Clicked] = useState(true);
+  const [is_DesignSubject_Clicked, set_DesignSubject_Clicked] = useState(false);
+  const [is_DiDongSubject_Clicked, set_DiDongSubject_Clicked] = useState(false);
+
+  const [is_FrontEndSubject_Clicked, set_FrontEndSubject_Clicked] = useState(false);
+  const [is_FullStackSubject_Clicked, set_FullStackSubject_Clicked] = useState(false);
+  const [is_TuDuySubject_Clicked, set_TuDuySubject_Clicked] = useState(false);
+
+  const S = [
+    {
+      "maDanhMuc": "BackEnd",
+      "tenDanhMuc": "Lập trình Backend"
+    },
+    {
+      "maDanhMuc": "Design",
+      "tenDanhMuc": "Thiết kế Web"
+    },
+    {
+      "maDanhMuc": "DiDong",
+      "tenDanhMuc": "Lập trình di động"
+    },
+    {
+      "maDanhMuc": "FrontEnd",
+      "tenDanhMuc": "Lập trình Front end"
+    },
+    {
+      "maDanhMuc": "FullStack",
+      "tenDanhMuc": "Lập trình Full Stack"
+    },
+    {
+      "maDanhMuc": "TuDuy",
+      "tenDanhMuc": "Tư duy lập trình"
+    }
+  ]
+
+  // {
+  //   "maDanhMuc": "BackEnd",
+  //   "tenDanhMuc": "Lập trình Backend"
+  //   "gioiThieu"
+  // },
 
   // môn học mặc định được chọn
-  let [activeSubject, setActiveSubject] = useState("Python");
+  let [activeSubject, setActiveSubject] = useState("BackEnd");
 
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
@@ -87,14 +126,14 @@ const CourseBoard = () => {
       {
         breakpoint: 550,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 2,
           slidesToScroll: 1,
         }
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.5,
+          slidesToShow: 2,
           slidesToScroll: 1,
         }
       },
@@ -128,13 +167,13 @@ const CourseBoard = () => {
   // slider khóa học ngẫu nhiên
   const allCourseSliderSetting = {
     slidesToScroll: 1,
-    slidesToShow: 1.2,
+    slidesToShow: 2,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 425,
         settings: {
-          slidesToShow: 1.4,
+          slidesToShow: 2,
           rows: 3,
         }
       },
@@ -149,7 +188,7 @@ const CourseBoard = () => {
       {
         breakpoint: 650,
         settings: {
-          slidesToShow: 1.5,
+          slidesToShow: 2,
         }
       },
       {
@@ -178,68 +217,53 @@ const CourseBoard = () => {
 
   // slider môn học
   const subjectSliderSetting = {
-    className: "slider variable-width",
-    slidesToShow: 5.5,
+    // className: "slider variable-width",
+    slidesToShow: 4,
     slidesToScroll: 2,
     variableWidth: true,
     initialSlide: 0,
-    // responsive: [
-    //   {
-    //     breakpoint: 1400,
-    //     setting: {
-    //       slidesToShow: 0,
-    //       slidesToScroll: 0,
-    //     }
-    //   }
-    // ]
+    responsive: [
+      {
+        breakpoint: 650,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+    ]
   }
   //--------------------***--------------------
 
 
-  // hàm thả xuống, kéo lên dropdown các khóa học theo môn được chọn
-  const handleDropDownCourses = (subject) => {
-    // console.log("handleDropDownCourses")
+  // hàm set trạng thái môn được click
+  const handleClickedSubject = (subject) => {
+    // console.log("handleClickedSubject")
     switch (subject) {
-      case "Python":
-        set_PythonSubject_Clicked(!is_PythonSubject_Clicked);
-        break;
-      case "Excel":
-        set_ExcelSubject_Clicked(!is_ExcelSubject_Clicked);
-        break;
-      case "WebDevelopment":
-        set_WebDevSubject_Clicked(!is_WebDevSubject_Clicked)
-        break;
-      case "JavaScript":
-        set_JavaScriptSubject_Clicked(!is_JavaScriptSubject_Clicked)
-        break;
-      case "DataScience":
-        set_DataScienceSubject_Clicked(!is_DataScienceSubject_Clicked)
-        break;
-      case "AWSCertification":
-        set_AWSSubject_Clicked(!is_AWSSubject_Clicked)
-        break;
-      case "Drawing":
-        set_DrawingSubject_Clicked(!is_DrawingSubject_Clicked)
-        break;
+      case "BackEnd":
+        return set_BackEndSubject_Clicked(!is_BackEndSubject_Clicked);
+      case "Design":
+        return set_DesignSubject_Clicked(!is_DesignSubject_Clicked);
+      case "DiDong":
+        return set_DiDongSubject_Clicked(!is_DiDongSubject_Clicked);
+      case "FrontEnd":
+        return set_FrontEndSubject_Clicked(!is_FrontEndSubject_Clicked);
+      case "FullStack":
+        return set_FullStackSubject_Clicked(!is_FullStackSubject_Clicked);
+      case "TuDuy":
+        return set_TuDuySubject_Clicked(!is_TuDuySubject_Clicked);
       default:
         return;
     }
   }
 
-  // hàm xác định môn học được chọn
-  const handleActiveCourse = (subject) => {
-    setActiveSubject(subject);
-  }
-
   // hàm chuyển tất cả môn về trạng thái chưa được chọn
   const setInactiveSubject = () => {
-    set_PythonSubject_Clicked(false);
-    set_ExcelSubject_Clicked(false);
-    set_WebDevSubject_Clicked(false);
-    set_JavaScriptSubject_Clicked(false);
-    set_DataScienceSubject_Clicked(false);
-    set_AWSSubject_Clicked(false);
-    set_DrawingSubject_Clicked(false);
+    set_BackEndSubject_Clicked(false);
+    set_DesignSubject_Clicked(false);
+    set_DiDongSubject_Clicked(false);
+
+    set_FrontEndSubject_Clicked(false);
+    set_FullStackSubject_Clicked(false);
+    set_TuDuySubject_Clicked(false);
   }
 
   // hàm thiết lập button chọn khóa học
@@ -257,248 +281,80 @@ const CourseBoard = () => {
   }
 
   // HÀM RENDER CÁC COMPONENT NHỎ THÀNH PHẦN--------------------
-
-  // render dropdown slider các khóa học được chọn
-  const renderDropdownCourse = (isSubjectClicked) => {
-    return (
-      <>{
-        isSubjectClicked ? (
-          <div className="block">
-            <Slider {...selectedCourseSliderSetting}>
-              {renderCourseByList(courseList)}
-            </Slider>
-          </div>
-        ) : (<></>)
-      }
-      </>
-    )
+  const renderDropdownCourse = (activeSubject, subject) => {
+    // console.log("renderDropdownCourse", subject)
+    if (activeSubject === subject) {
+      return (
+        <div>
+          <Slider {...selectedCourseSliderSetting}>
+            {renderCourseByList(courseList)}
+          </Slider>
+        </div>
+      )
+    } else {
+      return (<></>)
+    }
   }
 
   // render các item tên các môn học 
-  const renderSubjectListItem = () => {
-    return (
-      <div className="flex">
-        <div
-          onClick={() => { handleActiveCourse("Python"); setInactiveSubject(); set_PythonSubject_Clicked(!is_PythonSubject_Clicked) }}
-          className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}>Python</div>
-        <div
-          onClick={() => { handleActiveCourse("Excel"); setInactiveSubject(); set_ExcelSubject_Clicked(!is_ExcelSubject_Clicked) }}
-          className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-        >Excel</div>
+  const renderSubjectListItem = useCallback(
+    (activeSubject) => {
+      const list = [...courseCategoriList];
+      return list.map((item) => {
+        const { maDanhMuc, tenDanhMuc } = item;
+        return (
+          <div
+            onClick={
+              () => {
+                setActiveSubject(maDanhMuc);
+                setInactiveSubject();
+                handleClickedSubject(maDanhMuc);
+              }}
+            className={`${(activeSubject === maDanhMuc) ? "active" : ""} text-xl mr-3 cursor-pointer subjectItem`}
+          >{tenDanhMuc}</div>
+        )
+      })
+    }, [courseCategoriList]
+  )
 
-        <div
-          onClick={() => { handleActiveCourse("WebDevelopment"); setInactiveSubject(); set_WebDevSubject_Clicked(!is_WebDevSubject_Clicked) }}
-          className={`${is_WebDevSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-        >Web Development</div>
-
-        <div
-          onClick={() => { handleActiveCourse("JavaScript"); setInactiveSubject(); set_JavaScriptSubject_Clicked(!is_JavaScriptSubject_Clicked) }}
-          className={`${is_JavaScriptSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-        >JavaScript</div>
-
-        <div
-          onClick={() => { handleActiveCourse("DataScience"); setInactiveSubject(); set_DataScienceSubject_Clicked(!is_DataScienceSubject_Clicked) }}
-          className={`${is_DataScienceSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-        >Data Science</div>
-
-        <div
-          onClick={() => { handleActiveCourse("AWSCertification"); setInactiveSubject(); set_AWSSubject_Clicked(!is_AWSSubject_Clicked) }}
-          className={`${is_AWSSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-        >AWS Certification</div>
-
-        <div
-          onClick={() => { handleActiveCourse("Drawing"); setInactiveSubject(); set_DrawingSubject_Clicked(!is_DrawingSubject_Clicked) }}
-          className={`${is_DrawingSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-        >Drawing</div>
-      </div>
-    )
-  }
-
-  // render danh sách môn cùng slider các khóa thuộc môn đó
-  const renderSubjectList = (sliderSetting) => {
+  // render các item tên các môn học resopnsive
+  const renderSubjectListWithRes = () => {
     return (
       <div >
         <div >
           {(width < breakpoint1024) ? (
-            <Slider {...sliderSetting}>
-              <div
-                onClick={() => { handleActiveCourse("Python"); setInactiveSubject(); set_PythonSubject_Clicked(!is_PythonSubject_Clicked) }}
-                className={`${is_PythonSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}>Python</div>
-
-              <div
-                onClick={() => { handleActiveCourse("Excel"); setInactiveSubject(); set_ExcelSubject_Clicked(!is_ExcelSubject_Clicked) }}
-                className={`${is_ExcelSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-              >Excel</div>
-
-              <div
-                onClick={() => { handleActiveCourse("WebDevelopment"); setInactiveSubject(); set_WebDevSubject_Clicked(!is_WebDevSubject_Clicked) }}
-                className={`${is_WebDevSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-              >Web Development</div>
-
-              <div
-                onClick={() => { handleActiveCourse("JavaScript"); setInactiveSubject(); set_JavaScriptSubject_Clicked(!is_JavaScriptSubject_Clicked) }}
-                className={`${is_JavaScriptSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-              >JavaScript</div>
-
-              <div
-                onClick={() => { handleActiveCourse("DataScience"); setInactiveSubject(); set_DataScienceSubject_Clicked(!is_DataScienceSubject_Clicked) }}
-                className={`${is_DataScienceSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-              >Data Science</div>
-
-              <div
-                onClick={() => { handleActiveCourse("AWSCertification"); setInactiveSubject(); set_AWSSubject_Clicked(!is_AWSSubject_Clicked) }}
-                className={`${is_AWSSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-              >AWS Certification</div>
-
-              <div
-                onClick={() => { handleActiveCourse("Drawing"); setInactiveSubject(); set_DrawingSubject_Clicked(!is_DrawingSubject_Clicked) }}
-                className={`${is_DrawingSubject_Clicked ? 'active' : ''} font-semibold text-xl mr-3 cursor-pointer subjectItem`}
-              >Drawing</div>
+            <Slider {...subjectSliderSetting}>
+              {renderSubjectListItem(activeSubject)}
             </Slider>
           ) : (
-            <div>
-              {renderSubjectListItem()}
+            <div className="flex">
+              {renderSubjectListItem(activeSubject)}
             </div>
           )}
         </div>
-        {/* <div className=" mt-5 p-7 border-2">
-          {renderIntroBySubject(activeSubject)(activeSubject)}
-        </div> */}
       </div>
     )
   }
 
   // render giới thiệu theo môn học
   const renderIntroBySubject = (subject) => {
-    switch (subject) {
-      case "Python":
+    const list = [...courseCategoriList];
+    return list.map((item) => {
+      if (item.maDanhMuc === subject) {
+        const { tenDanhMuc, gioiThieu } = item;
         return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Expand your career opportunities with Python</h3>
-                  <p className="my-2">Whether you work in machine learning or finance, or are pursuing a career in web development or data science, Python is one of the most important skills you can learn. Python's simple syntax is especially suited for desktop, web, and business applications. Python's design philosophy emphasizes readability and usability.</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Python</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-          </div>
-        );
-      case "Excel":
-        return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Analyze and visualize data with Excel</h3>
-                  <p className="my-2">Regardless of the industry you work in, Microsoft Office Excel is an invaluable spreadsheet program for organizing and representing data. Excel offers functions, formulas, and pivot tables to help you aggregate and then analyze large sets of information.</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Excel</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-          </div>
-        );
-      case "WebDevelopment":
-        return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Build websites and applications with Web Development</h3>
-                  <p className="my-2">The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on.</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Web Development</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-
-          </div>
-        );
-      case "JavaScript":
-        return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Grow your software development skills with JavaScript</h3>
-                  <p className="my-2">JavaScript is one of the most ubiquitous programming languages on the planet, mostly because it's the backbone of interactive web applications. On top of that, JavaScript is a great language for beginners because it gives them a chance to write code that does something visual, which is exciting and helpful when you're just...</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore JavaScript</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-          </div>
-        );
-      case "DataScience":
-        return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Lead data-driven decisions with Data Science</h3>
-                  <p className="my-2">Data science is everywhere. Better data science practices are allowing corporations to cut unnecessary costs, automate computing, and analyze markets. Essentially, data science is the key to getting ahead in a competitive global climate.</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Data Science</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-          </div>
-        );
-      case "AWSCertification":
-        return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Become an expert in cloud computing with AWS Certification</h3>
-                  <p className="my-2">Because Amazon Web Services is a constantly evolving cloud ecosystem, staying up with new AWS services and features can be a chore. That’s why earning an AWS certification is such a great IT career move. In the eyes of future employers, you are an AWS authority.</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore AWS Certification</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-          </div>
-        );
-      case "Drawing":
-        return (
-          <div>
-            {(width >= breakpoint768) ?
-              <>
-                <div>
-                  <h3 className="font-bold text-2xl">Expand your creative skillset with Drawing</h3>
-                  <p className="my-2">Besides being the foundation upon which most art forms are built, drawing is also an excellent way to relieve stress and feed your inner creativity. Drawing teaches us how to be observant, develop an attention to detail, and express ourselves.</p>
-                </div>
-                <div className="flex justify-between">
-                  <button className="border-2 border-gray-900 p-2 font-bold text-sm mt-2">Explore Drawing</button>
-                  {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
-                </div>
-              </>
-              : <></>
-            }
-          </div>
-        );
-    }
+          <>
+            <div>
+              <h3 className="font-bold text-2xl">{tenDanhMuc}</h3>
+              <p className="subjectIntro">{gioiThieu}</p>
+            </div>
+            <div className="flex justify-end">
+              {(width >= breakpoint1024) ? setSlideButton("selectCourse") : <></>}
+            </div>
+          </>
+        )
+      }
+    })
   }
 
   // render khóa học theo danh sách truyền vào
@@ -517,7 +373,7 @@ const CourseBoard = () => {
     return (
       <div className="my-12">
         <h3 className="font-bold text-2xl text-lg-4xl flex justify-between">
-          Students are viewing
+          Khóa học nổi bật
           <div>
             {(width >= breakpoint1024) ? setSlideButton("allCourse") : (<></>)}
           </div>
@@ -535,56 +391,79 @@ const CourseBoard = () => {
 
 
   // HÀM RENDER COMPONENT THEO KÍCH THƯỚC MÀN HÌNH --------------------
+  const _renderSmallPhoneScreen = useCallback(
+    () => {
+      const list = [...courseCategoriList];
+      return (
+        <div>
+          {
+            list.map((item) => {
+              const { maDanhMuc, tenDanhMuc } = item;
+              return (
+                <>
+                  <div onClick={() => {
+                    setActiveSubject(maDanhMuc);
+                    handleClickedSubject(maDanhMuc);
+                  }} className="pointer subjectItemBorder font-bold items-center inline-flex justify-between">
+                    <p>{tenDanhMuc}</p>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  {renderDropdownCourse(activeSubject, maDanhMuc)}
+                </>
+              )
+            })
+          }
+          < div >
+            {renderAllCourse(isCourseSmallSize)}
+          </div >
+        </div>
+      )
+
+    }
+  )
+
   const renderSmallPhoneScreen = () => {
     return (
       <div>
         <div className="subjectBoard">
 
-          <div onClick={() => handleDropDownCourses("Python")} className="pointer subjectItemBorder font-bold items-center inline-flex justify-between">
+          <div onClick={() => handleClickedSubject("Python")} className="pointer subjectItemBorder font-bold items-center inline-flex justify-between">
             <p>Python</p>
             <i class="fas fa-chevron-down"></i>
           </div>
-          {renderDropdownCourse(is_PythonSubject_Clicked)}
+          {renderDropdownCourse(is_BackEndSubject_Clicked)}
 
-          <div onClick={() => handleDropDownCourses("Excel")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
+          <div onClick={() => handleClickedSubject("Excel")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
             <p>Excel</p>
             <i class="fas fa-chevron-down"></i>
           </div>
-          {renderDropdownCourse(is_ExcelSubject_Clicked)}
+          {renderDropdownCourse(is_DesignSubject_Clicked)}
 
-          <div onClick={() => handleDropDownCourses("WebDevelopment")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
+          <div onClick={() => handleClickedSubject("WebDevelopment")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
             <p>Web Development</p>
             <i class="fas fa-chevron-down"></i>
           </div>
-          {renderDropdownCourse(is_WebDevSubject_Clicked)}
+          {renderDropdownCourse(is_DiDongSubject_Clicked)}
 
-          <div onClick={() => handleDropDownCourses("JavaScript")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
+          <div onClick={() => handleClickedSubject("JavaScript")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
             <p>JavaScript</p>
             <i class="fas fa-chevron-down"></i>
           </div>
-          {renderDropdownCourse(is_JavaScriptSubject_Clicked)}
+          {renderDropdownCourse(is_FrontEndSubject_Clicked)}
 
-          <div onClick={() => handleDropDownCourses("DataScience")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
+          <div onClick={() => handleClickedSubject("DataScience")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
             <p>Data Science</p>
             <i class="fas fa-chevron-down"></i>
           </div>
-          {renderDropdownCourse(is_DataScienceSubject_Clicked)}
+          {renderDropdownCourse(is_FullStackSubject_Clicked)}
 
-          <div onClick={() => handleDropDownCourses("AWSCertification")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
+          <div onClick={() => handleClickedSubject("AWSCertification")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
             <p>AWS Certification</p>
             <i class="fas fa-chevron-down"></i>
           </div>
-          {renderDropdownCourse(is_AWSSubject_Clicked)}
+          {renderDropdownCourse(is_TuDuySubject_Clicked)}
+        </div>
 
-          <div onClick={() => handleDropDownCourses("Drawing")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Drawing</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_DrawingSubject_Clicked)}
-        </div>
-        <div>
-          {renderAllCourse(courseList, isCourseSmallSize)}
-        </div>
       </div>
 
     );
@@ -594,7 +473,7 @@ const CourseBoard = () => {
     return (
       <div>
         <div>
-          {renderSubjectList(subjectSliderSetting)}
+          {renderSubjectListWithRes()}
         </div>
         <div>
           {renderAllCourse()}
@@ -607,14 +486,14 @@ const CourseBoard = () => {
     return (
       <div>
         <div>
-          <h3 className="font-bold font-serif text-2xl">A broad selection of courses</h3>
-          <p className="text-lg">Choose from 155,000 online video courses with new additions published every month</p>
+          <h3 className="font-bold font-serif text-3xl">Đa dạng khóa học</h3>
+          <p className="text-2xl">Chọn lọc từ 155.000 video khóa học trực tuyến và được cập nhập hàng tháng</p>
         </div>
         <div className="mt-5">
-          {renderSubjectList(subjectSliderSetting)}
+          {renderSubjectListWithRes()}
         </div>
         <div className=" mt-5 p-7 border-2">
-          {renderIntroBySubject(activeSubject)}
+          {(width >= breakpoint768) ? renderIntroBySubject(activeSubject) : <></>}
           {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
             {renderCourseByList(courseList)}
           </Slider>}
@@ -630,14 +509,14 @@ const CourseBoard = () => {
     return (
       <div>
         <div>
-          <h3 className="font-bold font-serif text-3xl">A broad selection of courses</h3>
-          <p className="text-xl">Choose from 155,000 online video courses with new additions published every month</p>
+          <h3 className="font-bold font-serif text-3xl">Đa dạng khóa học</h3>
+          <p className="text-2xl">Chọn lọc từ 155.000 video khóa học trực tuyến và được cập nhập hàng tháng</p>
         </div>
         <div className="mt-5">
-          {renderSubjectList(subjectSliderSetting)}
+          {renderSubjectListWithRes()}
         </div>
         <div className=" mt-5 p-7 border-2">
-          {renderIntroBySubject(activeSubject)}
+          {(width >= breakpoint768) ? renderIntroBySubject(activeSubject) : <></>}
           {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
             {renderCourseByList(courseList)}
           </Slider>}
@@ -655,7 +534,7 @@ const CourseBoard = () => {
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :
-            (width >= breakpoint600) ? renderMediumPhoneScreen() : renderSmallPhoneScreen()
+            (width >= breakpoint600) ? renderMediumPhoneScreen() : _renderSmallPhoneScreen()
       }
     </div >
   )
