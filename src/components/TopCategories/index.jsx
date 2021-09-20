@@ -1,5 +1,8 @@
 import React from "react";
 
+// Styles
+import "./style.css";
+
 const categories = [
   {
     image:
@@ -50,10 +53,10 @@ export default function TopCateGories() {
         <a
           key={index}
           href="#"
-          className="block border border-black rounded-full text-md font-bold p-3 mr-2 mt-2 md:border-0"
+          className="block border border-black rounded-full text-md font-bold p-3 mr-2 mt-2 md:p-0 md:border-0"
         >
           <img
-            className="py-2 hidden md:block"
+            className="py-2 hidden animate-zoom-in md:block"
             src={item.image}
             alt={`Hình ảnh categories ${index}`}
           />
@@ -65,7 +68,7 @@ export default function TopCateGories() {
 
   return (
     <div className="p-6">
-      <h2 className="mb-3 text-2xl font-bold">Top categories</h2>
+      <h2 className="mb-3 text-2xl font-bold">Những danh mục hàng đầu</h2>
       <div className="flex flex-wrap md:grid grid-cols-4 m-0">
         {renderCategories()}
       </div>

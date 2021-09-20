@@ -6,6 +6,7 @@ import {
     UPDATE_INFOR_ACTION,
 } from "./Types/UserType";
 import { createAction } from ".";
+import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
 export const signInAction = (thongTinDangNhap, callBack) => {
     return async(dispatch) => {
@@ -38,8 +39,10 @@ export const signUpAction = (thongTinDangKi, callBack) => {
 export const getInforUserAction = () => {
     return async(dispatch) => {
         try {
+            dispatch(displayLoadingAction);
             const result = await userService.getInforUser();
-            dispatch(createAction(GET_INFOR_USER, result.data));
+            await dispatch(createAction(GET_INFOR_USER, result.data));
+            dispatch(hideLoadingAction);
         } catch (err) {
             console.log(err);
         }

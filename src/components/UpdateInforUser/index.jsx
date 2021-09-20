@@ -55,7 +55,7 @@ export default function UpdateInforUser() {
           <div className="py-12 px-12 bg-white rounded-2xl">
             <div>
               <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
-                Update Your Account
+                Thay Đổi Thông Tin
               </h1>
             </div>
             <div>
@@ -167,7 +167,7 @@ export default function UpdateInforUser() {
 
             <div className="text-center mt-6">
               <button className="py-3 w-64 text-xl text-white bg-purple-600 rounded-2xl">
-                Update your Infor
+                Xác nhận
               </button>
             </div>
           </div>

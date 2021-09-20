@@ -14,45 +14,45 @@ export default function Footer() {
                 <a className=" hover:text-gray-800">Udemy Business</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Teach on Udemy</a>
+                <a className=" hover:text-gray-800">Tham gia giảng dạy</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Get the app</a>
+                <a className=" hover:text-gray-800">Sử dụng app </a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">About us</a>
+                <a className=" hover:text-gray-800">Thông tin chúng tôi</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Contact us</a>
+                <a className=" hover:text-gray-800">Liên hệ</a>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/4 md:w-1/2 w-full md:text-left px-4">
             <nav className="list-none mb-10">
               <li>
-                <a className=" hover:text-gray-800">Careers</a>
+                <a className=" hover:text-gray-800">Công việc</a>
               </li>
               <li>
                 <a className=" hover:text-gray-800">Blog</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Help and Support</a>
+                <a className=" hover:text-gray-800">Liên hệ , hỗ trợ</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Affiliate</a>
+                <a className=" hover:text-gray-800">Chi nhánh</a>
               </li>
             </nav>
           </div>
           <div className="lg:w-1/4 md:w-1/2 text-left w-full px-4">
             <nav className="list-none mb-10">
               <li>
-                <a className=" hover:text-gray-800">Terms</a>
+                <a className=" hover:text-gray-800">Vấn đề</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Private Policy</a>
+                <a className=" hover:text-gray-800">Chính sách người dùng</a>
               </li>
               <li>
-                <a className=" hover:text-gray-800">Site App</a>
+                <a className=" hover:text-gray-800">Ứng dụng web</a>
               </li>
             </nav>
           </div>

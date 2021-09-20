@@ -3,12 +3,17 @@ import { courseService } from "../../Services/CourseService";
 import { createAction } from ".";
 import { useCallback } from "react";
 
-export const fetchCourseList = (dataRequest) => {
+import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
+
+export const fetchCourseList = () => {
   return async (dispatch) => {
     try {
-      const result = await courseService.getCourseList(dataRequest);
-
-      dispatch(createAction(actionCourseTypes.SET_COURSE_LIST, result.data));
+      dispatch(displayLoadingAction);
+      const result = await courseService.getCourseList();
+      await dispatch(
+        createAction(actionCourseTypes.SET_COURSE_LIST, result.data)
+      );
+      dispatch(hideLoadingAction);
     } catch (err) {
       console.log(err);
     }
@@ -93,15 +98,25 @@ export const reverseCourse = (dataRequest) => {
 export const searchCourse = (dataRequest, callBack) => {
   return async (dispatch) => {
     try {
+      dispatch(displayLoadingAction);
       const result = await courseService.getCourseList(dataRequest);
 
-      dispatch(
+      return dispatch(
         createAction(actionCourseTypes.SET_COURSE_SEARCHED, result.data)
       );
 
       callBack();
+
+      dispatch(hideLoadingAction);
     } catch (err) {
-      console.log(err);
+      const showSearchNoResult = true;
+
+      dispatch(
+        createAction(
+          actionCourseTypes.SET_COURSE_SEARCHED_NO_RESULT,
+          showSearchNoResult
+        )
+      );
     }
   };
 };

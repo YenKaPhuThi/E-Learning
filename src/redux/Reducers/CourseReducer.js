@@ -4,6 +4,7 @@ const initialState = {
   courseList: [],
   courseSearched: [],
   courseCategories: [],
+  isShowSearchNoResult: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,11 @@ const reducer = (state = initialState, action) => {
 
     case actionCourseTypes.SET_COURSE_SEARCHED:
       state.courseSearched = action.payload;
+      state.isShowSearchNoResult = false;
+      return { ...state };
+    
+    case actionCourseTypes.SET_COURSE_SEARCHED_NO_RESULT:
+      state.isShowSearchNoResult = action.payload;
       return { ...state };
 
     case actionCourseTypes.SET_COURSE_CATEGORIES:
