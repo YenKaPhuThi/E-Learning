@@ -7,7 +7,7 @@ const CourseItem = (props) => {
     const isSmallSize = props.isSmallSize;
 
     // Destructuring
-    const { hinhAnh, tenKhoaHoc } = props.data;
+    const { hinhAnh, tenKhoaHoc, nguoiTao, ngayTao, luotXem } = props.data;
     // console.log(index, hinhAnh, tenKhoaHoc)
 
     // Optional Chaining
@@ -34,23 +34,14 @@ const CourseItem = (props) => {
                             </p>
 
                             <p className="text-sm author">
-                                Jose Portilla
+                                {nguoiTao.hoTen}
+                                {/* Jose Portilla */}
                             </p>
 
-                            <div class="flex py-1.5">
-                                <p className="voteScore font-bold">4.6</p>
-                                <div className="voteIconGroup">
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star-half-alt"></i>
-                                </div>
-                                <p className="voteQuantity">(379,107)</p>
-
+                            <div className="flex py-1">
+                                <p className="voteScore text-sm font-bold">Lượt xem: {luotXem}</p>
+                                <p className="voteQuantity ml-1">{ngayTao}</p>
                             </div>
-
-                            <p className="font-bold text-lg">$89.99</p>
                         </div>
 
                         <div className="cartButton">
@@ -73,30 +64,22 @@ const CourseItem = (props) => {
                             <button><i class="fas fa-cart-plus"></i></button>
                         </div>
                     </div>
-                    <div class="max-w-xs bg-white overflow-hidden ml-3">
+                    <div class="w-60 bg-white overflow-hidden ml-3">
                         <div className="my-3">
                             <p className="coureName">
-                                {tenKhoaHoc}
+                                {(tenKhoaHoc.length >= 28) ? `${tenKhoaHoc.slice(0, 15)}...` : `${tenKhoaHoc}`}
+                                {/* {tenKhoaHoc.slice(0, 20)} */}
+
                             </p>
 
                             <p className="text-xs author">
-                                Jose Portilla
+                                {nguoiTao.hoTen}
+                                {/* Jose Portilla */}
                             </p>
 
-                            <div class="flex py-1.5">
-                                <p className="voteScore text-xs font-bold">4.6</p>
-                                <div className="voteIconGroup">
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star"></i>
-                                    <i class="voteIcon fas fa-star-half-alt"></i>
-                                </div>
-                                <p className="text-xs voteQuantity">(379,107)</p>
-
+                            <div>
+                                <p className="voteScore text-xs font-bold">Lượt xem: {luotXem}</p>
                             </div>
-
-                            <p className="font-bold text-base">$89.99</p>
                         </div>
                     </div>
                 </div>
