@@ -1,7 +1,6 @@
 import { actionCourseTypes } from "./Types/CourseType";
 import { courseService } from "../../Services/CourseService";
 import { createAction } from ".";
-import { useCallback } from "react";
 
 import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 
@@ -18,6 +17,20 @@ export const fetchCourseList = () => {
       console.log(err);
     }
   };
+};
+
+export const fetchCourseBySubject = (dataRequest) => {
+  return async () => {
+    try {
+      const result = await courseService.getCourseBySubject(dataRequest);
+      console.log("result", result);
+    } catch (error) {
+      console.log("fetchCourseBySubject", error);
+    }
+  };
+  // const list = courseService.getCourseBySubject(dataRequest);
+  // console.log("courseAction fetchCourseBySubject list", list);
+  // return list;
 };
 
 export const fetchCourseCategories = () => {
@@ -56,6 +69,7 @@ export const fetchCourseCategories = () => {
   return async (dispatch) => {
     try {
       const result = await courseService.getCourseCategories();
+
       const list = [...result.data];
       result.data = list.map((dataItem) => {
         const intro = courseCategoriIntro.find((introItem) => {
@@ -100,13 +114,10 @@ export const searchCourse = (dataRequest, callBack) => {
     try {
       dispatch(displayLoadingAction);
       const result = await courseService.getCourseList(dataRequest);
-
       return dispatch(
         createAction(actionCourseTypes.SET_COURSE_SEARCHED, result.data)
       );
-
       callBack();
-
       dispatch(hideLoadingAction);
     } catch (err) {
       const showSearchNoResult = true;
