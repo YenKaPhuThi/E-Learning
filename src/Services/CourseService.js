@@ -6,11 +6,10 @@ export class CourseService extends baseService {
     super();
   }
 
-  getCourseBySubject = (dataRequest) => {
+  getCourseBySubject = (dataRequest) =>
     this.get(
       `api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${dataRequest}&MaNhom=${CODE_GROUP}`
     );
-  };
 
   getCourseList = (dataRequest = "") =>
     this.get(

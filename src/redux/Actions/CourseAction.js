@@ -20,17 +20,17 @@ export const fetchCourseList = () => {
 };
 
 export const fetchCourseBySubject = (dataRequest) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       const result = await courseService.getCourseBySubject(dataRequest);
-      console.log("result", result);
+      // console.log("fetchCourseBySubject", result.data);
+      dispatch(
+        createAction(actionCourseTypes.SET_COURSE_BY_CATEGORIES, result.data)
+      );
     } catch (error) {
       console.log("fetchCourseBySubject", error);
     }
   };
-  // const list = courseService.getCourseBySubject(dataRequest);
-  // console.log("courseAction fetchCourseBySubject list", list);
-  // return list;
 };
 
 export const fetchCourseCategories = () => {

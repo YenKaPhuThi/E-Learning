@@ -31,12 +31,7 @@ export default function Home() {
     dispatch(fetchCourseList());
     dispatch(fetchCourseCategories());
     dispatch(getInforUserAction());
-
-
-    console.log("home list", fetchCourseBySubject("BackEnd"));
-    // const list = fetchCourseBySubject("BackEnd");
-    // console.log("home");
-    // console.log("fetchCourseBySubject", list);
+    // dispatch(fetchCourseBySubject("BackEnd"));
   }, [dispatch]);
 
   const handleRegisterCoure = (codeCourse) => {

@@ -1,9 +1,10 @@
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CourseItem from "../CourseItem";
 import Slider from "react-slick";
 
+import { fetchCourseBySubject } from "../../Redux/Actions/CourseAction";
 import "./styles.css";
 
 const CourseBoard = () => {
@@ -18,6 +19,9 @@ const CourseBoard = () => {
   const breakpoint1024 = 1024;
   const breakpoint1400 = 1400;
 
+  const dispatch = useDispatch();
+
+  // Biến chứa dữ liệu lấy từ redux store
   const courseList = useSelector((state) => {
     return state.course.courseList;
   });
@@ -25,6 +29,10 @@ const CourseBoard = () => {
   const courseCategoriList = useSelector((state) => {
     return state.course.courseCategories;
   });
+
+  // const courseByCategori = useSelector((state) => {
+  //   return state.course.courseByCategori;
+  // })
 
   // dùng xác định slider nào dùng button nào
   const selectedSlideRef = useRef();
@@ -82,11 +90,12 @@ const CourseBoard = () => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
     // subscribe to window resize event "onComponentDidMount"
     window.addEventListener("resize", handleResizeWindow);
+    // dispatch(fetchCourseBySubject(activeSubject));
     return () => {
       // unsubscribe "onComponentDestroy"
       window.removeEventListener("resize", handleResizeWindow);
     };
-  }, []);
+  }, [dispatch, activeSubject]);
 
   // SET UP LOGIC BUTTON CHỌN KHÓA HỌC--------------------
   const slideNextCourse = useCallback(
@@ -118,10 +127,11 @@ const CourseBoard = () => {
 
   // slider khóa học được chọn
   const selectedCourseSliderSetting = {
-    speed: 500,
+    // speed: 500,
     slidesToScroll: 1,
     slidesToShow: 4,
     initialSlide: 0,
+    Infinity: true,
     responsive: [
       {
         breakpoint: 550,
@@ -145,19 +155,22 @@ const CourseBoard = () => {
 
         }
       },
-      {
-        breakpoint: 1400,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 3,
+      // {
+      //   breakpoint: 1400,
+      //   settings: {
+      //     slidesToShow: 5,
+      //     slidesToScroll: 2,
+      //     Infinity: true,
 
-        }
-      },
+      //   }
+      // },
       {
         breakpoint: 1750,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 3,
+          slidesToScroll: 2,
+          rows: 0,
+          Infinity: true,
 
         }
       },
@@ -391,7 +404,7 @@ const CourseBoard = () => {
 
 
   // HÀM RENDER COMPONENT THEO KÍCH THƯỚC MÀN HÌNH --------------------
-  const _renderSmallPhoneScreen = useCallback(
+  const renderSmallPhoneScreen = useCallback(
     () => {
       const list = [...courseCategoriList];
       return (
@@ -421,53 +434,6 @@ const CourseBoard = () => {
 
     }
   )
-
-  const renderSmallPhoneScreen = () => {
-    return (
-      <div>
-        <div className="subjectBoard">
-
-          <div onClick={() => handleClickedSubject("Python")} className="pointer subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Python</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_BackEndSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("Excel")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Excel</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_DesignSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("WebDevelopment")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Web Development</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_DiDongSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("JavaScript")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>JavaScript</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_FrontEndSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("DataScience")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Data Science</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_FullStackSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("AWSCertification")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>AWS Certification</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_TuDuySubject_Clicked)}
-        </div>
-
-      </div>
-
-    );
-  }
 
   const renderMediumPhoneScreen = () => {
     return (
@@ -505,6 +471,8 @@ const CourseBoard = () => {
     );
   }
 
+  // console.log("courseByCategori", courseByCategori);
+
   const renderLaptopScreen = () => {
     return (
       <div>
@@ -534,7 +502,7 @@ const CourseBoard = () => {
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :
-            (width >= breakpoint600) ? renderMediumPhoneScreen() : _renderSmallPhoneScreen()
+            (width >= breakpoint600) ? renderMediumPhoneScreen() : renderSmallPhoneScreen()
       }
     </div >
   )
