@@ -6,15 +6,8 @@ export class CourseService extends baseService {
     super();
   }
 
-  getCourseBySubject = (dataRequest) =>
-    this.get(
-      `api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${dataRequest}&MaNhom=${CODE_GROUP}`
-    );
-
   getCourseList = (dataRequest = "") =>
-    this.get(
-      `api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${CODE_GROUP}&tenKhoaHoc=${dataRequest}`
-    );
+    this.get(`api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${CODE_GROUP}&tenKhoaHoc=${dataRequest}`);
 
   getCourseCategories = () => this.get("api/QuanLyKhoaHoc/LayDanhMucKhoaHoc");
 

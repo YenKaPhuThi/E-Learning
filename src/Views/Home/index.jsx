@@ -7,7 +7,6 @@ import {
   fetchCourseCategories,
   registerCourse,
   reverseCourse,
-  fetchCourseBySubject,
 } from "../../Redux/Actions/CourseAction";
 
 // Components
@@ -31,7 +30,6 @@ export default function Home() {
     dispatch(fetchCourseList());
     dispatch(fetchCourseCategories());
     dispatch(getInforUserAction());
-    // dispatch(fetchCourseBySubject("BackEnd"));
   }, [dispatch]);
 
   const handleRegisterCoure = (codeCourse) => {
