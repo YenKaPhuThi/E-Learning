@@ -120,9 +120,8 @@ const CourseBoard = () => {
   const selectedCourseSliderSetting = {
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 5,
+    slidesToShow: 4,
     initialSlide: 0,
-    infinity: false,
     responsive: [
       {
         breakpoint: 550,
@@ -143,6 +142,15 @@ const CourseBoard = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
+
+        }
+      },
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+
         }
       },
       {
@@ -150,7 +158,7 @@ const CourseBoard = () => {
         settings: {
           slidesToShow: 5,
           slidesToScroll: 3,
-          infinity: true,
+
         }
       },
     ],
@@ -209,12 +217,11 @@ const CourseBoard = () => {
 
   // slider môn học
   const subjectSliderSetting = {
-    className: "slider variable-width",
+    // className: "slider variable-width",
     slidesToShow: 4,
     slidesToScroll: 2,
     variableWidth: true,
     initialSlide: 0,
-    // infinity: true,
     responsive: [
       {
         breakpoint: 650,
@@ -273,7 +280,6 @@ const CourseBoard = () => {
     )
   }
 
-  // hàm lấy danh sách khóa học theo môn được chọn
   const getCoursesByChosenSubject = useCallback(() => {
     const list = [];
     courseList.find((item) => {
@@ -365,7 +371,6 @@ const CourseBoard = () => {
   // render khóa học theo danh sách truyền vào
   const renderCourseByList = (list, isCourseSmallSize) => {
     return list.map((item, index) => {
-      // console.log("item", item.danhMucKhoaHoc.maDanhMucKhoahoc);
       return (
         <div key={index}>
           <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
@@ -393,22 +398,6 @@ const CourseBoard = () => {
       </div>
     )
   }
-
-  // const slider = () => {
-  //   const list = getCoursesByChosenSubject();
-  //   const settings = {
-  //     dots: false,
-  //     infinite: true,
-  //     speed: 500,
-  //     slidesToShow: list.length < 5 ? 5 : 5,
-  //     slidesToScroll: 3,
-  //   };
-  //   return (
-  //     <Slider ref={selectedSlideRef} {...settings}>
-  //       {renderCourseByList(getCoursesByChosenSubject())}
-  //     </Slider>
-  //   )
-  // }
   //--------------------***--------------------
 
 
@@ -450,11 +439,10 @@ const CourseBoard = () => {
         <div>
           {renderSubjectListWithRes()}
         </div>
-        <div className=" mt-5 p-7 border-2">          {
-          <Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
+        <div className=" mt-5 p-7 border-2">
+          {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
             {renderCourseByList(getCoursesByChosenSubject())}
-          </Slider>
-        }
+          </Slider>}
         </div>
         <div>
           {renderAllCourse()}
@@ -496,13 +484,11 @@ const CourseBoard = () => {
         <div className="mt-5">
           {renderSubjectListWithRes()}
         </div>
-        <div className=" mt-8 p-7 border-2">
+        <div className=" mt-5 p-7 border-2">
           {(width >= breakpoint768) ? renderIntroBySubject(activeSubject) : <></>}
-          {
-            <Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
-              {renderCourseByList(getCoursesByChosenSubject())}
-            </Slider>
-          }
+          {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
+            {renderCourseByList(getCoursesByChosenSubject())}
+          </Slider>}
         </div>
         <div>
           {renderAllCourse()}
@@ -513,7 +499,7 @@ const CourseBoard = () => {
   //--------------------***--------------------
 
   return (
-    <div className={`${width > breakpoint1400 ? 'px-40 mt-10' : 'px-6 mt-10'}`}>
+    <div className={`${width > breakpoint1400 ? 'px-48' : 'px-6 mt-10'}`}>
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :
