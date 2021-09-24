@@ -280,6 +280,17 @@ const CourseBoard = () => {
     )
   }
 
+  const getCoursesByChosenSubject = useCallback(() => {
+    const list = [];
+    courseList.find((item) => {
+      if (item.danhMucKhoaHoc.maDanhMucKhoahoc === activeSubject) {
+        list.push(item);
+      }
+    })
+    console.log("list", list)
+    return list;
+  }, [courseList, activeSubject])
+
   // HÀM RENDER CÁC COMPONENT NHỎ THÀNH PHẦN--------------------
   const renderDropdownCourse = (activeSubject, subject) => {
     // console.log("renderDropdownCourse", subject)
@@ -287,7 +298,7 @@ const CourseBoard = () => {
       return (
         <div>
           <Slider {...selectedCourseSliderSetting}>
-            {renderCourseByList(courseList)}
+            {renderCourseByList(getCoursesByChosenSubject())}
           </Slider>
         </div>
       )
@@ -391,7 +402,7 @@ const CourseBoard = () => {
 
 
   // HÀM RENDER COMPONENT THEO KÍCH THƯỚC MÀN HÌNH --------------------
-  const _renderSmallPhoneScreen = useCallback(
+  const renderSmallPhoneScreen = useCallback(
     () => {
       const list = [...courseCategoriList];
       return (
@@ -422,58 +433,16 @@ const CourseBoard = () => {
     }
   )
 
-  const renderSmallPhoneScreen = () => {
-    return (
-      <div>
-        <div className="subjectBoard">
-
-          <div onClick={() => handleClickedSubject("Python")} className="pointer subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Python</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_BackEndSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("Excel")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Excel</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_DesignSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("WebDevelopment")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Web Development</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_DiDongSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("JavaScript")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>JavaScript</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_FrontEndSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("DataScience")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>Data Science</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_FullStackSubject_Clicked)}
-
-          <div onClick={() => handleClickedSubject("AWSCertification")} className="subjectItemBorder font-bold items-center inline-flex justify-between">
-            <p>AWS Certification</p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          {renderDropdownCourse(is_TuDuySubject_Clicked)}
-        </div>
-
-      </div>
-
-    );
-  }
-
   const renderMediumPhoneScreen = () => {
     return (
       <div>
         <div>
           {renderSubjectListWithRes()}
+        </div>
+        <div className=" mt-5 p-7 border-2">
+          {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
+            {renderCourseByList(getCoursesByChosenSubject())}
+          </Slider>}
         </div>
         <div>
           {renderAllCourse()}
@@ -495,7 +464,7 @@ const CourseBoard = () => {
         <div className=" mt-5 p-7 border-2">
           {(width >= breakpoint768) ? renderIntroBySubject(activeSubject) : <></>}
           {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
-            {renderCourseByList(courseList)}
+            {renderCourseByList(getCoursesByChosenSubject())}
           </Slider>}
         </div>
         <div>
@@ -518,7 +487,7 @@ const CourseBoard = () => {
         <div className=" mt-5 p-7 border-2">
           {(width >= breakpoint768) ? renderIntroBySubject(activeSubject) : <></>}
           {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
-            {renderCourseByList(courseList)}
+            {renderCourseByList(getCoursesByChosenSubject())}
           </Slider>}
         </div>
         <div>
@@ -534,7 +503,7 @@ const CourseBoard = () => {
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :
-            (width >= breakpoint600) ? renderMediumPhoneScreen() : _renderSmallPhoneScreen()
+            (width >= breakpoint600) ? renderMediumPhoneScreen() : renderSmallPhoneScreen()
       }
     </div >
   )
