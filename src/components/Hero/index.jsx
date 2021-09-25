@@ -23,7 +23,7 @@ export default function Hero() {
               <h1 className="font-serif sm:text-4xl text-2xl  font-semibold text-black">
                 Trở thành người hướng dẫn
               </h1>
-
+              {/* // */}
               <p class="text-left pt-3 text-black text-xl xl:w-4/5 mb-8 leading-relaxed">
                 {/* Instructors from around the world teach millions of students on
                 Udemy. We provide the tools and skills to teach what you love. */}
