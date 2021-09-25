@@ -57,7 +57,7 @@ export default function Search() {
               </p>
             </div>
             <ul className="text-right">
-              <li className="font-bold">{luotXem} views</li>
+              <li className="font-bold">{luotXem} lượt xem</li>
               <li className="text-gray text-xs">{ngayTao}</li>
             </ul>
           </div>
@@ -72,23 +72,23 @@ export default function Search() {
         {isShowSearchNoResult ? (
           <div>
             <h2 className="text-2xl font-bold mb-8">
-              Sorry, we couldn't find any results
+              Xin lỗi, chúng tôi không tìm thấy kết quả nào
             </h2>
             <h3 className="text-xl font-bold mb-6">
-              Try adjusting your search. Here are some ideas:
+              Hãy thử điều chỉnh tìm kiếm của bạn. Đây là một số ý tưởng:
             </h3>
             <ul className="list-disc list-inside">
               <li className="mb-1">
-                Make sure all words are spelled correctly
+                Hãy chắc chắn rằng tất cả các từ đều đúng chính tả
               </li>
-              <li className="mb-1">Try different search terms</li>
-              <li className="mb-1">Try more general search terms</li>
+              <li className="mb-1">Thử các cụm từ tìm kiếm khác</li>
+              <li className="mb-1">Thử các cụm từ tìm kiếm chung</li>
             </ul>
           </div>
         ) : (
           <>
             <p className="font-bold text-gray text-right">
-              {totalResult} results
+              {totalResult} Kết quả
             </p>
             <ul>{renderCourseSearched()}</ul>
           </>
