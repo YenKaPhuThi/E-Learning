@@ -30,15 +30,15 @@ export default function FeatureByCategory() {
         <h2 className="text-2xl font-bold mb-8 md:text-3xl">
           Những chủ đề nổi bật theo danh mục
         </h2>
-        <div className="grid grid-cols-2 mx-auto gap-x-3 gap-y-4 md:grid-cols-4 md:gap-y-6">
+        <div className="grid grid-cols-2 mx-auto gap-x-3 gap-y-4 md:grid-cols-3 md:gap-y-6">
           {renderCategory()}
         </div>
-        <button
+        {/* <button
           type="button"
           className="px-8 py-3  border font-bold rounded  text-gray-700 mt-8 border-gray-700 hover:bg-gray-100"
         >
           Khám phá các chủ đề khác
-        </button>
+        </button> */}
       </div>
     </div>
   );
