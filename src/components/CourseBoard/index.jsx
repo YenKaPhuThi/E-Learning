@@ -373,7 +373,7 @@ const CourseBoard = () => {
     return list.map((item, index) => {
       return (
         <div key={index}>
-          <CourseItem data={item} isSmallSize={isCourseSmallSize}></CourseItem>
+          <CourseItem data={item} index={index} isSmallSize={isCourseSmallSize}></CourseItem>
         </div >
       );
     })
@@ -484,7 +484,7 @@ const CourseBoard = () => {
         <div className="mt-5">
           {renderSubjectListWithRes()}
         </div>
-        <div className=" mt-5 p-7 border-2">
+        <div className="selectedCourseListBorder">
           {(width >= breakpoint768) ? renderIntroBySubject(activeSubject) : <></>}
           {<Slider ref={selectedSlideRef} {...selectedCourseSliderSetting}>
             {renderCourseByList(getCoursesByChosenSubject())}
@@ -500,6 +500,7 @@ const CourseBoard = () => {
 
   return (
     <div className={`${width > breakpoint1400 ? 'px-48' : 'px-6 mt-10'}`}>
+
       {
         (width >= breakpoint1024) ? renderLaptopScreen() :
           (width >= breakpoint768) ? renderTabletScreen() :
