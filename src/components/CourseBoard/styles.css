@@ -46,3 +46,11 @@
   border-width: 2px;
   height: 500px;
 }
+
+.bgGreen {
+  background-color: seagreen;
+}
+
+.allCourse {
+  height: 300px;
+}

@@ -390,7 +390,7 @@ const CourseBoard = () => {
           </div>
         </h3>
 
-        <div>
+        <div className="allCourse">
           <Slider ref={allSlideRef} {...allCourseSliderSetting}>
             {renderCourseByList(courseList, isCourseSmallSize)}
           </Slider>
