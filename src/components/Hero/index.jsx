@@ -45,7 +45,7 @@ export default function Hero() {
           <div className="container p-4 mx-auto text-center">
             <h2 className="font-semibold text-black font-serif sm:text-3xl text-2xl">
               {/* Trusted by companies of all sizes */}
-              Được tin cậy bởi đa dạng các công ty
+              Được tin cậy bởi đa dạng công ty
             </h2>
           </div>
           <div className="container flex flex-wrap justify-center mx-auto text-coolGray-600">
@@ -108,9 +108,8 @@ export default function Hero() {
               <p className="text-left mt-1 text-black text-xl w-4/5 mb-8 leading-relaxed">
                 {/* Learners around the world are launching new careers, advancing
                 in their fields, and enriching their lives. */}
-                Học viên khắp thế giới đang khởi đầu sự nghiệp,
-                thăng tiến trong sự nghiệp
-                và cải thiện cuộc đời.
+                Học viên khắp thế giới đang khởi đầu và
+                thăng tiến trong sự nghiệp, cải thiện cuộc đời.
               </p>
               <div className="flex justify-center w-full md:w-max ">
                 <button className="block text-white font-bold w-full bg-black border-0 py-4 md:px-5  focus:outline-none  text-base xl:w-full xl:block">
