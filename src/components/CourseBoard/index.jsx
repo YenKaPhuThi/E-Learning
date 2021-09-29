@@ -322,6 +322,7 @@ const CourseBoard = () => {
     return list.map((item, index) => {
       if (item.maDanhMuc === subject) {
         const { tenDanhMuc, gioiThieu } = item;
+        console.log("item", item);
         return (
           <React.Fragment key={index}>
             <div>
