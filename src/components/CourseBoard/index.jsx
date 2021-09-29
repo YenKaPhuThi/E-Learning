@@ -42,38 +42,6 @@ const CourseBoard = () => {
   const [is_FullStackSubject_Clicked, set_FullStackSubject_Clicked] = useState(false);
   const [is_TuDuySubject_Clicked, set_TuDuySubject_Clicked] = useState(false);
 
-  const S = [
-    {
-      "maDanhMuc": "BackEnd",
-      "tenDanhMuc": "Lập trình Backend"
-    },
-    {
-      "maDanhMuc": "Design",
-      "tenDanhMuc": "Thiết kế Web"
-    },
-    {
-      "maDanhMuc": "DiDong",
-      "tenDanhMuc": "Lập trình di động"
-    },
-    {
-      "maDanhMuc": "FrontEnd",
-      "tenDanhMuc": "Lập trình Front end"
-    },
-    {
-      "maDanhMuc": "FullStack",
-      "tenDanhMuc": "Lập trình Full Stack"
-    },
-    {
-      "maDanhMuc": "TuDuy",
-      "tenDanhMuc": "Tư duy lập trình"
-    }
-  ]
-
-  // {
-  //   "maDanhMuc": "BackEnd",
-  //   "tenDanhMuc": "Lập trình Backend"
-  //   "gioiThieu"
-  // },
 
   // môn học mặc định được chọn
   let [activeSubject, setActiveSubject] = useState("BackEnd");
