@@ -4,6 +4,8 @@ import {
     INFO_USER,
     SIGN_IN_ACTION,
     UPDATE_INFOR_ACTION,
+    UPDATE_COURSE_USER_REGISTED,
+    UPDATE_COURSE_USER_REVERSED
 } from "../Actions/Types/UserType";
 
 const initialState = {
@@ -16,7 +18,8 @@ const reducer = (state = initialState, action) => {
             state.userLogin = action.payload;
             localStorage.setItem(TOKEN, action.payload.accessToken);
             return {...state };
-        case GET_INFOR_USER:
+            case GET_INFOR_USER || UPDATE_COURSE_USER_REGISTED || UPDATE_COURSE_USER_REVERSED:
+                console.log("hi");
             state.userLogin = action.payload;
             localStorage.setItem(INFO_USER, JSON.stringify(action.payload));
             return {...state };

@@ -4,10 +4,9 @@ import { useDispatch } from "react-redux";
 // Redux store
 import {
   fetchCourseList,
-  fetchCourseCategories,
-  registerCourse,
-  reverseCourse,
+  fetchCourseCategories
 } from "../../Redux/Actions/CourseAction";
+import { getInforUserAction } from "../../Redux/Actions/UserAction";
 
 // Components
 import Hero from "../../Components/Hero";
@@ -17,10 +16,6 @@ import Footer from "../../Components/Footer";
 import TopCateGories from "../../Components/TopCategories";
 import FeatureByCategory from "../../Components/FeatureByCategory";
 import CourseBoard from "../../Components/CourseBoard";
-
-// Util
-import { USER_LOGIN, CODE_GROUP } from "../../util/settings/config";
-import { getInforUserAction } from "../../Redux/Actions/UserAction";
 import Loading from "../../Components/Loading";
 
 export default function Home() {
@@ -31,28 +26,6 @@ export default function Home() {
     dispatch(fetchCourseCategories());
     dispatch(getInforUserAction());
   }, [dispatch]);
-
-  const handleRegisterCoure = (codeCourse) => {
-    const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-
-    const dataRequest = {
-      maKhoaHoc: codeCourse,
-      taiKhoan: userLogin.taiKhoan,
-    };
-
-    dispatch(registerCourse(dataRequest));
-  };
-
-  const hanleReverseCourse = (codeCourse) => {
-    const userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
-
-    const dataRequest = {
-      maKhoaHoc: codeCourse,
-      taiKhoan: userLogin.taiKhoan,
-    };
-
-    dispatch(reverseCourse(dataRequest));
-  };
 
   return (
     <>
