@@ -1,13 +1,3 @@
-:root {
-  frimary: "#1c1d1f";
-  secondary: "#5624d0";
-  containerpadding: 24px;
-}
-
-/*
- screen < 768px
-*/
-
 /* SUBJECT COMPONENT */
 
 .pointer {
@@ -47,5 +37,20 @@
 
 .subjectIntro {
   margin: 10px;
-  height: 70px;
+  height: 60px;
+}
+
+.selectedCourseListBorder {
+  margin-top: 20px;
+  padding: 28px;
+  border-width: 2px;
+  height: 500px;
+}
+
+.bgGreen {
+  background-color: seagreen;
+}
+
+.allCourse {
+  height: 300px;
 }

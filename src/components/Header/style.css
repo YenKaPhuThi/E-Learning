@@ -8,10 +8,12 @@
 
 .hover-text-primary:hover {
   color: #a433f0;
+  text-decoration: none;
 }
 
 .hover-bg-gray:hover {
   background-color: rgba(0, 0, 0, 0.04);
+  text-decoration: none;
 }
 
 .bg-primary {
@@ -50,4 +52,8 @@
 
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+.no-underline-hover:hover {
+  text-decoration: none;
 }

@@ -6,26 +6,14 @@ export class CourseService extends baseService {
     super();
   }
 
-  getCourseBySubject = (dataRequest) => {
-    this.get(
-      `api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${dataRequest}&MaNhom=${CODE_GROUP}`
-    );
-  };
-
   getCourseList = (dataRequest = "") =>
-    this.get(
-      `api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${CODE_GROUP}&tenKhoaHoc=${dataRequest}`
-    );
+    this.get(`api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${CODE_GROUP}&tenKhoaHoc=${dataRequest}`);
 
   getCourseCategories = () => this.get("api/QuanLyKhoaHoc/LayDanhMucKhoaHoc");
 
-  registerCourse = (dataRequest) => {
-    this.post("api/QuanLyKhoaHoc/DangKyKhoaHoc", dataRequest);
-  };
+  registerCourse = (dataRequest) => this.post("api/QuanLyKhoaHoc/DangKyKhoaHoc", dataRequest);
 
-  reverseCourse = (dataRequest) => {
-    this.post("api/QuanLyKhoaHoc/HuyGhiDanh", dataRequest);
-  };
+  reverseCourse = (dataRequest) => this.post("api/QuanLyKhoaHoc/HuyGhiDanh", dataRequest);
 }
 
 export const courseService = new CourseService();

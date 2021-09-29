@@ -48,12 +48,8 @@ export default function Header(props) {
     return state.course.courseCategories;
   });
 
-  const handleShowNavbar = () => {
+  const handleShowCloseNavbar = () => {
     setShowNavbar(true);
-  };
-
-  const handleCloseNavbar = () => {
-    setShowNavbar(false);
   };
 
   const handleNavbarMenu = () => {
@@ -101,7 +97,7 @@ export default function Header(props) {
           <button
             className="p-3 md:hidden"
             onClick={() => {
-              handleShowNavbar();
+              handleShowCloseNavbar(true);
             }}
           >
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
@@ -204,28 +200,74 @@ export default function Header(props) {
               </div>
 
               <ul
-                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border"
+                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border w-48"
                 style={{ border: "1px !important" }}
               >
                 <li>
                   <div className="max-w-md p-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block">
-                    <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-14 sm:w-14 mt-4 sm:mb-0">
-                      <img
-                        src="https://source.unsplash.com/100x100/?portrait"
-                        alt
-                        className="object-cover object-center w-full h-full rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
-                      />
+                    <div className="flex-shrink-0 w-full mb-6 h-50 sm:h-14 sm:w-14 sm:mb-0">
+
+                      <div className="flex">
+                        <img
+                          src="https://source.unsplash.com/100x100/?portrait"
+                          alt
+                          className="object-cover object-center w-full h-full rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
+                        />
+                        <div className="flex pt-2 pl-3">
+                          <h2 className="text-xl font-semibold">
+                            {userLogin.hoTen}
+                          </h2>
+                          <span className="ml-2 text-xs text-coolGray-600">
+                            {changeToText(userLogin.maLoaiNguoiDung)}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 mt-3">
+                        <span className="flex items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                            aria-label="Email address"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"
+                            />
+                          </svg>
+                          <span className="text-coolGray-600 text-xs">
+                            {userLogin.email}
+                          </span>
+                        </span>
+                        <span className="flex items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                            aria-label="Phonenumber"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M449.366,89.648l-.685-.428L362.088,46.559,268.625,171.176l43,57.337a88.529,88.529,0,0,1-83.115,83.114l-57.336-43L46.558,362.088l42.306,85.869.356.725.429.684a25.085,25.085,0,0,0,21.393,11.857h22.344A327.836,327.836,0,0,0,461.222,133.386V111.041A25.084,25.084,0,0,0,449.366,89.648Zm-20.144,43.738c0,163.125-132.712,295.837-295.836,295.837h-18.08L87,371.76l84.18-63.135,46.867,35.149h5.333a120.535,120.535,0,0,0,120.4-120.4v-5.333l-35.149-46.866L371.759,87l57.463,28.311Z"
+                            />
+                          </svg>
+                          <span className="text-coolGray-600 text-xs">
+                            {userLogin?.soDT}
+                          </span>
+                        </span>
+                      </div>
                     </div>
                     <div className="flex flex-col space-y-1">
-                      <div>
+                      {/* <div>
                         <h2 className="text-xl font-semibold">
                           {userLogin.hoTen}
                         </h2>
                         <span className="text-xs text-coolGray-600">
                           {changeToText(userLogin.maLoaiNguoiDung)}
                         </span>
-                      </div>
-                      <div className="space-y-1">
+                      </div> */}
+                      {/* <div className="space-y-1">
                         <span className="flex items-center space-x-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +300,7 @@ export default function Header(props) {
                             {userLogin?.soDT}
                           </span>
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </li>
@@ -266,7 +308,7 @@ export default function Header(props) {
                 <li className="hover:text-purple-400">
                   <NavLink
                     to="/mylearning"
-                    className="max-w-md py-2 px-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
+                    className="max-w-md py-2 px-3 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
                     Khóa học đã đăng ký
                   </NavLink>
@@ -274,7 +316,7 @@ export default function Header(props) {
                 <li className="hover:text-purple-400">
                   <NavLink
                     to="/chinhsuathongtin"
-                    className="max-w-md py-2 px-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
+                    className="max-w-md py-2 px-3 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
                     Thay đổi thông tin
                   </NavLink>
@@ -287,7 +329,7 @@ export default function Header(props) {
                     onClick={() => {
                       localStorage.removeItem(TOKEN);
                     }}
-                    className="max-w-md py-2 px-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
+                    className="max-w-md py-2 px-3 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block"
                   >
                     Đăng xuất
                   </NavLink>
@@ -297,19 +339,19 @@ export default function Header(props) {
           ) : (
             <>
               <li>
-                <NavLink to="/signin" className="btn-outline font-bold">
+                <NavLink to="/signin" className="btn-outline font-bold no-underline-hover" >
                   Đăng nhập
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" className="btn-dark font-bold">
+                <NavLink to="/signup" className="btn-outline font-bold no-underline-hover" >
                   Đăng ký
                 </NavLink>
               </li>
             </>
           )}
 
-          <button className="btn-outline font-bold pl-5 ">
+          <button className="btn-outline font-bold pl-4 mr-4">
             <i class="fas fa-globe-asia"></i>
           </button>
         </ul>
@@ -319,7 +361,7 @@ export default function Header(props) {
         <button
           className="absolute left-72 -top-14 bg-white w-12 h-12 m-4 z-10 rounded-full"
           onClick={() => {
-            handleCloseNavbar();
+            handleShowCloseNavbar(false);
           }}
         >
           <i className="fas fa-times fa-1x"></i>
@@ -398,9 +440,8 @@ export default function Header(props) {
           </div>
 
           <div
-            className={`  absolute h-full w-full ${
-              showNavbarMenu ? "hidden" : ""
-            }`}
+            className={`  absolute h-full w-full ${showNavbarMenu ? "hidden" : ""
+              }`}
           >
             <div className=" border-b  border-gray-300 p-4 bg-gray-100 ">
               <div
