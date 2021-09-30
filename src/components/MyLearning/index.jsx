@@ -116,7 +116,6 @@ export default function MyLearning() {
           </div>
         </div>
       </div>
-      );
     </Layout>
   );
 }
