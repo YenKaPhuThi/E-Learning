@@ -33,12 +33,6 @@ export default function FeatureByCategory() {
         <div className="grid grid-cols-2 mx-auto gap-x-3 gap-y-4 md:grid-cols-3 md:gap-y-6">
           {renderCategory()}
         </div>
-        {/* <button
-          type="button"
-          className="px-8 py-3  border font-bold rounded  text-gray-700 mt-8 border-gray-700 hover:bg-gray-100"
-        >
-          Khám phá các chủ đề khác
-        </button> */}
       </div>
     </div>
   );

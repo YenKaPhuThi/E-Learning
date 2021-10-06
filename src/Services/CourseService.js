@@ -11,6 +11,8 @@ export class CourseService extends baseService {
       `api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${CODE_GROUP}&tenKhoaHoc=${dataRequest}`
     );
 
+  getCourseDetail = (dataRequest) => this.get(`api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${dataRequest}`);
+
   getCourseCategories = () => this.get("api/QuanLyKhoaHoc/LayDanhMucKhoaHoc");
 
   registerCourse = (dataRequest) =>
