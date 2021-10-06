@@ -42,38 +42,32 @@ const CourseBoard = () => {
   const [is_FullStackSubject_Clicked, set_FullStackSubject_Clicked] = useState(false);
   const [is_TuDuySubject_Clicked, set_TuDuySubject_Clicked] = useState(false);
 
-  const S = [
+  const introList = [
     {
-      "maDanhMuc": "BackEnd",
-      "tenDanhMuc": "Lập trình Backend"
+      maDanhMuc: "BackEnd",
+      gioiThieu: "Phần back end của một trang web bao gồm một máy chủ, một ứng dụng, và một cơ sở dữ liệu. Một lập trình viên back-end xây dựng và duy trì công nghệ mà sức mạnh của những thành phần đó, cho phép phần giao diện người dùng của trang web có thể tồn tại được. (Nguồn: topdev.vn)"
     },
     {
-      "maDanhMuc": "Design",
-      "tenDanhMuc": "Thiết kế Web"
+      maDanhMuc: "Design",
+      gioiThieu: "Thiết kế là việc tạo ra một bản vẽ hoặc quy ước nhằm tạo dựng một đối tượng, một hệ thống hoặc một tương tác giữa người với người có thể đo lường được. Trong một số trường hợp, việc xây dựng, tạo hình trực tiếp một đối tượng cũng được coi là vận dụng tư duy thiết kế. (Nguồn: wikipedia)"
     },
     {
-      "maDanhMuc": "DiDong",
-      "tenDanhMuc": "Lập trình di động"
+      maDanhMuc: "DiDong",
+      gioiThieu: "Lập trình viên mobile là những chuyên viên lập trình về công nghệ di động.  Ngành sử dụng ngôn ngữ lập trình (Java, C#,..) để viết, sáng tạo và phát triển các phần mềm nhằm gia tăng tiện ích cho thiết bị di động. (Nguồn: topcv.vn)"
     },
     {
-      "maDanhMuc": "FrontEnd",
-      "tenDanhMuc": "Lập trình Front end"
+      maDanhMuc: "FrontEnd",
+      gioiThieu: "Phần front-end của một trang web là phần tương tác với người dùng. Tất cả mọi thứ bạn nhìn thấy khi điều hướng trên Internet, từ các font chữ, màu sắc cho tới các menu xổ xuống và các thanh trượt, là một sự kết hợp của HTML, CSS, và JavaScript được điều khiển bởi trình duyệt máy tính của bạn. (Nguồn: topdev.vn)"
     },
     {
-      "maDanhMuc": "FullStack",
-      "tenDanhMuc": "Lập trình Full Stack"
+      maDanhMuc: "FullStack",
+      gioiThieu: "Khái niệm lập trình viên full stack là vai trò đã được phổ biến bởi bộ phận kỹ thuật của Facebook. Ý tưởng là một lập trình viên full stack có thể làm việc liên chức năng trên “stack” công nghệ, tức là cả front end lẫn back end. (Nguồn: topdev.vn)"
     },
     {
-      "maDanhMuc": "TuDuy",
-      "tenDanhMuc": "Tư duy lập trình"
-    }
+      maDanhMuc: "TuDuy",
+      gioiThieu: "Thế nhưng hiểu một cách đơn giản nhất về tư duy lập trình thì đó chính là cách mà các lập trình viên sử dụng đầu óc, chất xám của mình để tư duy và giải quyết vấn đề, phân tích vấn đề, biến vấn đề lớn thành những vấn đề nhỏ. Để từ đó họ đưa ra được cách giải quyết tốt nhất. (Nguồn: timviec365.vn)"
+    },
   ]
-
-  // {
-  //   "maDanhMuc": "BackEnd",
-  //   "tenDanhMuc": "Lập trình Backend"
-  //   "gioiThieu"
-  // },
 
   // môn học mặc định được chọn
   let [activeSubject, setActiveSubject] = useState("BackEnd");
@@ -233,6 +227,19 @@ const CourseBoard = () => {
   }
   //--------------------***--------------------
 
+  // hàm thêm phần giới thiệu cho mỗi môn học
+  const addIntroInCategoriList = useCallback(() => {
+    const list = [...courseCategoriList];
+    return list.map((item) => {
+      const intro = introList.find((introItem) => {
+        if (introItem.maDanhMuc === item.maDanhMuc) {
+          return introItem;
+        }
+      })
+      return item = { ...item, gioiThieu: intro.gioiThieu };
+    })
+  }, [courseCategoriList])
+  const addedIntroCategoriList = addIntroInCategoriList();
 
   // hàm set trạng thái môn được click
   const handleClickedSubject = (subject) => {
@@ -287,7 +294,7 @@ const CourseBoard = () => {
         list.push(item);
       }
     })
-    console.log("list", list)
+    // console.log("list", list)
     return list;
   }, [courseList, activeSubject])
 
@@ -350,11 +357,11 @@ const CourseBoard = () => {
 
   // render giới thiệu theo môn học
   const renderIntroBySubject = (subject) => {
-    const list = [...courseCategoriList];
+    const list = [...addedIntroCategoriList];
     return list.map((item, index) => {
       if (item.maDanhMuc === subject) {
         const { tenDanhMuc, gioiThieu } = item;
-        console.log("item", item);
+        // console.log("item", item);
         return (
           <React.Fragment key={index}>
             <div>

@@ -25,7 +25,7 @@ export class baseService {
       },
     });
   };
-  
+
   put = (url, model) => {
     return Axios({
       url: `${DOMAIN}/${url}`,
