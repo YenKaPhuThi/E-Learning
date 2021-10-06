@@ -31,8 +31,13 @@ const CourseItem = (props) => {
   const [isCourseRegisted, setIsCourseRegisted] = useState(false);
 
   useEffect(() => {
+    fetchCourseDetail(maKhoaHoc);
     handleFindCourseUserRegisted(maKhoaHoc);
   }, [maKhoaHoc]);
+
+  const userLogin = useSelector((state) => {
+    return state.user?.userLogin;
+  });
 
   const userLogin = useSelector((state) => {
     return state.user?.userLogin;

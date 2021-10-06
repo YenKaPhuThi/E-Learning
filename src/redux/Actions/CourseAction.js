@@ -1,7 +1,6 @@
 import { actionCourseTypes } from "./Types/CourseType";
 import { courseService } from "../../Services/CourseService";
 import { createAction } from ".";
-import { useCallback } from "react";
 
 import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 import {
@@ -23,6 +22,20 @@ export const fetchCourseList = () => {
     }
   };
 };
+
+export const fetchCourseDetail = (dataRequest) => {
+  return async (dispatch) => {
+    try {
+      dispatch(displayLoadingAction);
+
+      const result = await courseService.getCourseDetail(dataRequest);
+
+      dispatch(createAction(actionCourseTypes.SET_COURSE_DETAIL, result.data))
+    } catch (error) {
+      
+    }
+  }
+}
 
 export const fetchCourseCategories = () => {
   return async (dispatch) => {
@@ -47,7 +60,7 @@ export const registerCourse = (dataRequest) => {
 
       const result = await courseService.registerCourse(dataRequest);
 
-      dispatch(createAction(UPDATE_COURSE_USER_REGISTED));
+      await dispatch(createAction(UPDATE_COURSE_USER_REGISTED));
 
       dispatch(hideLoadingAction);
 
@@ -65,7 +78,7 @@ export const reverseCourse = (dataRequest) => {
 
       const result = await courseService.reverseCourse(dataRequest);
 
-      dispatch(createAction(UPDATE_COURSE_USER_REVERSED));
+      await dispatch(createAction(UPDATE_COURSE_USER_REVERSED));
 
       dispatch(hideLoadingAction);
       alert("Đã hủy thành công!")
