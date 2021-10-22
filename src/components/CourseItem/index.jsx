@@ -5,6 +5,7 @@ import "./styles.css";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchCourseDetail,
   registerCourse,
   reverseCourse,
 } from "../../Redux/Actions/CourseAction";
@@ -34,10 +35,6 @@ const CourseItem = (props) => {
     fetchCourseDetail(maKhoaHoc);
     handleFindCourseUserRegisted(maKhoaHoc);
   }, [maKhoaHoc]);
-
-  const userLogin = useSelector((state) => {
-    return state.user?.userLogin;
-  });
 
   const userLogin = useSelector((state) => {
     return state.user?.userLogin;

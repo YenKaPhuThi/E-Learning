@@ -200,7 +200,7 @@ export default function Header(props) {
               </div>
 
               <ul
-                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border"
+                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border min-w-max"
                 style={{ border: "1px !important" }}
               >
                 <li>
@@ -293,12 +293,18 @@ export default function Header(props) {
           ) : (
             <>
               <li>
-                <NavLink to="/signin" className="btn-outline font-bold">
+                <NavLink
+                  to="/signin"
+                  className="btn-outline font-bold no-underline-hover"
+                >
                   Đăng nhập
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" className="btn-dark font-bold">
+                <NavLink
+                  to="/signup"
+                  className="btn-outline font-bold no-underline-hover"
+                >
                   Đăng ký
                 </NavLink>
               </li>
@@ -460,8 +466,9 @@ export default function Header(props) {
       </nav>
 
       <div
-        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${showHideSearchBox ? "" : "hidden"
-          }`}
+        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${
+          showHideSearchBox ? "" : "hidden"
+        }`}
       >
         <form
           action="/"
