@@ -200,21 +200,20 @@ export default function Header(props) {
               </div>
 
               <ul
-                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border w-48"
+                className="dropdown-menu right-0 bg-white top-9 absolute hidden text-gray-700 pt-1 border-gray-100 border min-w-max"
                 style={{ border: "1px !important" }}
               >
                 <li>
                   <div className="max-w-md p-4 sm:flex sm:space-x-6 bg-coolGray-50 text-coolGray-800 block">
                     <div className="flex-shrink-0 w-full mb-6 h-50 sm:h-14 sm:w-14 sm:mb-0">
-
                       <div className="flex">
                         <img
                           src="https://source.unsplash.com/100x100/?portrait"
                           alt
                           className="object-cover object-center w-full h-full rounded-full ring-2 ring-offset-4 ring-violet-600 ring-offset-coolGray-100"
                         />
-                        <div className="flex pt-2 pl-3">
-                          <h2 className="text-xl font-semibold">
+                        <div className="flex pt-2 pl-3 flex-wrap">
+                          <h2 className="text-sm font-bold">
                             {userLogin.hoTen}
                           </h2>
                           <span className="ml-2 text-xs text-coolGray-600">
@@ -339,12 +338,18 @@ export default function Header(props) {
           ) : (
             <>
               <li>
-                <NavLink to="/signin" className="btn-outline font-bold no-underline-hover" >
+                <NavLink
+                  to="/signin"
+                  className="btn-outline font-bold no-underline-hover"
+                >
                   Đăng nhập
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" className="btn-outline font-bold no-underline-hover" >
+                <NavLink
+                  to="/signup"
+                  className="btn-outline font-bold no-underline-hover"
+                >
                   Đăng ký
                 </NavLink>
               </li>
@@ -440,8 +445,9 @@ export default function Header(props) {
           </div>
 
           <div
-            className={`  absolute h-full w-full ${showNavbarMenu ? "hidden" : ""
-              }`}
+            className={`  absolute h-full w-full ${
+              showNavbarMenu ? "hidden" : ""
+            }`}
           >
             <div className=" border-b  border-gray-300 p-4 bg-gray-100 ">
               <div
@@ -505,8 +511,9 @@ export default function Header(props) {
       </nav>
 
       <div
-        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${showHideSearchBox ? "" : "hidden"
-          }`}
+        className={`fixed top-0 left-0 bottom-0 flex flex-col w-full bg-white z-10 ${
+          showHideSearchBox ? "" : "hidden"
+        }`}
       >
         <form
           action="/"
